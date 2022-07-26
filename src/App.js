@@ -38,6 +38,7 @@ import LastHome from './Customer/last_home';
 import CustomerHome from './Customer/customer_home';
 import HomeFooter from './Customer/home_footer';
 import NewItemCard from './Admin/new_item_card';
+import ImageUploadPreviewComponent from './Admin/ImageUploadPreviewComponent'
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
    <Routes>
      <Route path='/success' element={<Success />} />
        <Route path='/new_item_card' element={<NewItemCard />} />
-        
+           <Route path='/image_upload' element={<ImageUploadPreviewComponent />} />
       <Route path='/home_footer' element={<HomeFooter />} />
       <Route path='/last_home' element={<LastHome />} />
        <Route path='/customer_home' element={<CustomerHome />} />

@@ -2267,21 +2267,16 @@ Home Header */
 
 
 .add_item_card  {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-
  margin-left: 30px;
 height: 126px;
 margin-top: -200%;
 padding-left: 150px;
   position: relative;
-  border: 1px solid #fff;
+ 
  
 }
 
-.add_item_card:hover {
-  background-color: #FAFAFA;
-}
+
 
 .add_item_card2 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

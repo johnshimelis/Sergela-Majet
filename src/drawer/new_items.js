@@ -23,24 +23,34 @@ const { TextArea } = Input;
 
 export default function NewItems(){
 
+
     let newClass = 'new_class';
     let otherClass = 'row';
     const [state, setState] = useState({
       cardsCount: 0
     });
+      const addRobotHandler = () => {
+       onButtonClick() 
+       
+};
   
+    const [image, setImage] = useState('');
 
-  const addRobotHandler = () => {
-   setState(prevState => {
-      return { cardsCount: prevState.cardsCount + 1 };
+     const  fileSelectedHandler = (event) => {
+      setState(prevState => {
+           return { cardsCount: prevState.cardsCount + 1 };
     });
-  };
+      setImage(URL.createObjectURL(event.target.files[0]));
+        
+        }
+
 
   const getCards = ()  => {
+    
     let cards = [];
     for(let i = 0; i < state.cardsCount; i++) {
       if( i < 2){
-         cards.push(<NewItemCard/>)
+         cards.push(<NewItemCard src={image}/>)
 
       }
     
@@ -57,7 +67,7 @@ export default function NewItems(){
       let new_cards = [];
       for(let j = 2; j < state.cardsCount; j++){
         if(j >=2 && j <5){
-        new_cards.push(<NewItemCard/>);
+        new_cards.push(<NewItemCard src={image} />);
        
         }
       }
@@ -67,7 +77,7 @@ export default function NewItems(){
       let new_card = [];
       for(let k = 5; k < state.cardsCount; k++){
         if(state.cardsCount >2){
-        new_card.push(<NewItemCard/>);
+        new_card.push(<NewItemCard src={image} />);
        
         }
       }
@@ -78,12 +88,7 @@ export default function NewItems(){
   
 
 
-// const [image, setImage] = useState('');
 
-//      fileSelectedHandler = event => {
-//          console.log(event.target.files[0]);
-//           setImage(event.target.files[0])
-// //         }
 //       const handleApi = () =>{
 //           const url = 'http://18.217.229.72:8400/api/v1/products';
 //           const formData = new FormData();
@@ -136,7 +141,7 @@ export default function NewItems(){
            hoverable
            style={{ width: 140, height: 130, background:'#FAFAFA' }}
            >
-           <input type='file' id='file' ref={inputFile} style={{display: 'none' }} />
+           <input type='file' id='file' ref={inputFile} style={{display: 'none' }} accept="image/*" onChange={fileSelectedHandler} multiple/>
             <button style={{borderColor:'#FAFAFA', backgroudColor : '#FAFAFA', marginLeft:15}} onClick={addRobotHandler}> <span>
               <i class="fa-solid fa-plus" style={{color:'#8C8C8C', 
              fontSize : 30, cursor:'pointer', marginLeft:5, marginTop:10, 
@@ -145,6 +150,7 @@ export default function NewItems(){
              </button>
             
              <h3 style={{fontSize:10, marginTop:10}}>እዚህ ጋር ፎቶ ያስገቡ</h3>
+         
        <div className={otherClass}>
               <Row gutter={[0, 200]}>
               <Col span={10} className="col">
