@@ -86,12 +86,14 @@ function HomeHeader(){
        
           <div className="home_header">
            <div className="header">
-             <Menu style={{backgroundColor:"#1D1D1D"}} theme="#1D1D1D" mode="horizontal" >
-            <Menu.Item key="home">ጥቅሎች</Menu.Item>
+
+         
+             <Menu  className="menus" style={{backgroundColor:"#000"}}  mode="horizontal" >
+            <Menu.Item  key="home">ጥቅሎች</Menu.Item>
             <Menu.Item key="about">ያዘዙት ዕቃዎች</Menu.Item>
-            <Menu.Item key="about" style={{fontSize:'25px'}}><i class="fa-solid fa-user"></i></Menu.Item>
-           
-         </Menu>
+            <Menu.Item key="about" style={{fontSize:'25px'}}><i class="fa-solid fa-user"></i>
+            </Menu.Item>
+           </Menu>
         
 <div className="dropdown">
      <Dropdown overlay={menu} trigger={['click']} className="dropdown">
@@ -102,16 +104,7 @@ function HomeHeader(){
       </Space>
     </a>
      </Dropdown>
-          {/* <hr
-        style={{
-            marginTop:0,
-            color: "lightgray",
-            backgroundColor: "lightblue",
-            height: 1, 
-            width: 1420,
-            marginLeft:-50
-        }}
-    /> */}
+    
        
             <div className="logo">
                 <img src={image} className="img"/>
@@ -130,7 +123,7 @@ function HomeHeader(){
                     />
                 
                 <div className="dropdown">
-                  <Dropdown overlay={dropdown} trigger={['click']} className="dropdown">
+                  <Dropdown overlay={dropdown} trigger={['click']} >
                  <a onClick={e => e.preventDefault()}>
                 <Space style={{color:"#BFBFBF", marginLeft:16, marginTop:2}}>
                  የዕቃ ምድቦች
@@ -142,7 +135,7 @@ function HomeHeader(){
    
              </div>
             <div className="icons">
-                 <i class="fa-solid fa-heart"></i>
+                 <i class="fa-solid fa-heart" id="heart"></i>
                  <i class="fa-solid fa-cart-arrow-down"></i>
              </div>
              <div className="btn">
@@ -151,6 +144,8 @@ function HomeHeader(){
             
       
       </div>
+     
+
       </div>
       </div>
      

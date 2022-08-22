@@ -39,6 +39,8 @@ import CustomerHome from './Customer/customer_home';
 import HomeFooter from './Customer/home_footer';
 import NewItemCard from './Admin/new_item_card';
 import ImageUploadPreviewComponent from './Admin/ImageUploadPreviewComponent'
+import LastHeader from './components/last_header';
+import LastHeader2 from './components/last_header2';
 
 
 function App() {
@@ -46,7 +48,9 @@ function App() {
  <Router>
    <Routes>
      <Route path='/success' element={<Success />} />
+     <Route path='/last_header2' element={<LastHeader2 />} />
        <Route path='/new_item_card' element={<NewItemCard />} />
+       <Route path='/last_header' element={<LastHeader />} />
            <Route path='/image_upload' element={<ImageUploadPreviewComponent />} />
       <Route path='/home_footer' element={<HomeFooter />} />
       <Route path='/last_home' element={<LastHome />} />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Layout, Menu} from 'antd';
 import 'antd/dist/antd.css';
 import image1 from '../images/vector 1.png';
@@ -15,9 +15,15 @@ import image11 from '../images/Vector11.png';
 
 
 
+
 export default function LastSideNav() {
+   const [isSideNav, setSideNav] = useState(false);
+
+  const toggleClass = () => {
+    setSideNav(!isSideNav);
+  };
   return (
-    <div className='last_side_nav'>
+    <div className={isSideNav ? 'last_side_nav': 'new_class'}>
       <ul>
        
         <li className='sub'><i class="fa-solid fa-bars"></i><a href="#">ምድቦች</a></li>
@@ -34,18 +40,7 @@ export default function LastSideNav() {
 
       </ul>
       
-        {/* <Menu theme='white' mode="vertical" defaultSelectedKeys={['']}>
-            <Menu.Item key="home">የእቃ መለያዎች</Menu.Item>
-            <Menu.Item key="about">ሁሉም ምድቦች</Menu.Item>
-            <Menu.Item key="features">የታሸጉ ምግቦች</Menu.Item> 
-            <Menu.Item key="howitworks">እህልና ጥራጥሬ</Menu.Item>
-            <Menu.Item key="faq">መጠጦች</Menu.Item> 
-            <Menu.Item key="pricing">የንጽህና መጠበቂያ</Menu.Item>
-            <Menu.Item key="contact">የጽሕፈት መሳሪያዎች</Menu.Item>
-              <Menu.Item key="faq">ልብስ አና ጫማ</Menu.Item> 
-            <Menu.Item key="pricing">የንጽሕና መጠበቂያ</Menu.Item>
-            <Menu.Item key="contact">የጽሕፈት መሳሪያዎች</Menu.Item>
-         </Menu> */}
+     
     
     </div>
   )
