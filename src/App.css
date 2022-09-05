@@ -1036,13 +1036,220 @@ input[type="text"][value="50 "] {
   
 }
 
-.selected_items{
-  margin-top: -40px;
+.last_home .selected_items{
+  margin-top: 20px;
+  margin-left: 2.3%;
+  width: 95%;
+
+
 }
 .selected_items .btn_two{
   margin-left: 10px;
   width: 150px;
 }
+.last_home .selected_items{
+
+
+}
+
+
+.last_home .selected_items .selected_cards{
+  background-color: #F5F5F5;
+  display: inline-block;
+  height: 150px;
+    margin-top: 20px;
+    border-radius: 10px;
+    width: 18%;
+    margin-left: 1.5%;
+   
+  }
+  .last_home .selected_items .selected_cards img{
+   width: 80%;
+  height: 90%;
+  margin-left: 4%;
+  }
+ .last_home .selected_items .selected_cards:nth-child(5)  img{
+  margin-left: -5%;
+  margin-top: 10px;
+  height: 80%;
+   width: 60%;
+    }
+  .last_home .selected_items .selected_cards:nth-child(5) span img{
+  width: 60%;
+  margin-left: 40%;
+  margin-top: -150px;
+}
+ .last_home .selected_items .selected_cards:nth-child(5) .names {
+  margin-top: -15px;
+    
+}
+.last_home .selected_items .selected_cards .names p{
+  padding-top: 20px;
+}
+
+.last_home .cloths{
+    margin-left: 1.5%;
+    width: 100%;
+}
+.last_home .cloths h6{
+  margin-left: 50px;
+  margin-top: 50px;
+}
+.last_home .cloths .cloths_img .cloths_name .rate {
+margin-left: 7%;
+}
+.last_home .cloths .cloths_img {
+  background-color: #EEEEEE;
+  margin-left: 3%;
+  margin-top: 2%;
+  width: 16%;
+  height: 160px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.last_home .cloths_img img {
+  width: 70%;
+  margin-left: 20px;
+
+
+}
+
+.last_home .cloths .cloths_name {
+  background-color: #fff;
+  padding-bottom: 30px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 150px;
+
+}
+
+.last_home .cloths .cloths_name p {
+  margin-left: 10%;
+  padding-top: 10px;
+}
+
+
+
+
+
+
+
+
+.last_home .high_rating{
+  margin-left:1.5%;
+  width: 100%;
+}
+.last_home .high_rating .high_rating_img{
+  background-color: #EEEEEE;
+  margin-left: 3%;
+  margin-top: 2%;
+  width: 16%;
+  height: 160px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.last_home .high_rating_img img{
+  width: 70%;
+  margin-left: 20px;
+ 
+  
+}
+.last_home .high_rating .high_rating_name{
+  background-color: #fff;
+  padding-bottom: 30px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 150px;
+  
+}
+.last_home .high_rating .high_rating_name p{
+  margin-left: 10%;
+  padding-top: 10px;
+}
+.last_home .high_rating .high_rating_img .high_rating_name .rate{
+  margin-left: 7%;
+}
+.last_home .package .content{
+margin-top: 200px;
+}
+.last_home .package .content .btn Button{
+  margin-left: -520px;
+  background-color: #D9D9D9;
+  color: #000;
+  font-size: 150%;
+  border-radius: 100px;
+  margin-top: 50px;
+
+}
+.last_home .package .content .last_btn{
+  margin-top: -80px;
+}
+
+.last_home .package .content .last_btn Button{
+    margin-left: 96%;
+    background-color: #D9D9D9;
+    color: #000;
+    font-size: 150%;
+    border-radius: 100px;
+    margin-top: -400px;
+   
+    
+}
+.last_home .package .content .last_btn  .fa-solid{
+margin-top: -100px;
+}
+.last_home .package .content .package_item{
+   margin-left: 320px;
+   margin-top: -100px;
+  
+   width: 70%;
+}
+.last_home .package .content .selected_cards{
+  background-color: #F5F5F5;
+    display: inline-block;
+    height: 150px;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 21.5%;
+    margin-left: 2%;
+}
+.last_home .package .content .package_item{
+  width: 80%;
+  margin-left: 280px;
+}
+.last_home .package .content .selected_cards img{
+  width: 70%;
+    height: 70%;
+    margin-left: 8%;
+}
+.last_home .package .content .selected_cards h6{
+  font-size: 90%;
+  margin-top: 10%;
+  width: 100%;
+}
+.last_home .package .content .selected_cards p {
+  font-size: 90%;
+  margin-top: -11%;
+  margin-left: 70%;
+  width: 100%;
+  color: #000;
+}
+.last_home .package .content .package_items {
+  background-color: #D9D9D9;
+  display: inline-block;
+  margin-left: 2%;
+  height: 200px;
+  width: 25%;
+  border-radius: 10px;
+}
+.last_home .package .content .package_items img{
+  width: 60%;
+  height: 60%;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
 .deliver h2{
   margin-top: 50px;
   margin-left: -100px;
@@ -1056,7 +1263,7 @@ input[type="text"][value="50 "] {
   height: 100px;
 
 }
-
+  
 .deliver .select-after {
   width: 350px;
 }
@@ -1932,6 +2139,7 @@ Home Header */
   margin-top: -2%;
  }
 
+ 
  .home_header .btn button{
   width: 100%;
   margin-left: 310%;
@@ -1984,8 +2192,22 @@ Home Header */
    font-size: 150%;
    margin-left: -20px;
  }
- 
-
+.last_home .some_btn{
+   width: 95%;
+   padding-top: 0.5%;
+   height: 1.5%;
+   margin-left:30px;
+   margin-top: 30px;
+   background-color: #FDEFD0;
+   text-align: center;
+}
+.last_home .some_btn Button{
+ background: none;
+ border: none;
+ font-weight: bold;
+ font-size: 20px;
+ cursor: pointer;
+}
 
 
 
@@ -2044,8 +2266,8 @@ Home Header */
 }
 .last_home .content .circular{
   background-color: #FCE2AD;
-  height: 300px;
-  width: 300px;
+  height: 270px;
+  width: 270px;
   border-radius: 50%;
   margin-left: 55%;
   margin-top: -200px;
@@ -2053,13 +2275,14 @@ Home Header */
 .last_home .content .circular img{
   margin-left: -20%;
   margin-top: 15%;
+  width: 350px;
 }
 .last_home .right_side{
   background-color: #fff;
   height: 560px;
   margin-left: 81%;
   width:16%;
-  margin-top: -525px;
+  margin-top: -600px;
 }
 .last_home .right_side h5{
   text-align: center;
@@ -2146,7 +2369,7 @@ Home Header */
 .last_home{
  
   background-color: #FAFAFA;
-  height: 3500px;
+  height: 4000px;
 }
 
 .last_home .services{
@@ -2253,10 +2476,15 @@ background-color: #F9F9F9;
   margin-left: -3%;
   padding-top: 3%;
 }
+.last_home .discounts .discount_img{
+  width: 30%;
+  margin-left: 1%;
+}
 .last_home .discounts img{
-  margin-top: 2%;
+  margin-top: 20px;
   height: 90%;
   margin-left: 15%;
+  width: 100%;
 }
 .last_home .for_womens{
   background-color: #F6BA33;
@@ -2267,8 +2495,8 @@ background-color: #F9F9F9;
   border-radius: 10px;
 }
 .last_home .for_womens h2{
-  margin-left: 30%;
-  margin-top: -15%;
+  margin-left: 400px;
+  margin-top: -200px;
   font-size: 60px;
   text-align: center;
   width: 60%;
@@ -2280,12 +2508,54 @@ background-color: #F9F9F9;
 }
 .home_footer{
   background-color: #000;
-  height: 350px;
+  height:350px;
+  width: 100%;
+}
+.home_footer .part_1{
+  width: 25%;
+
+}
+.home_footer .part_1 Button{
+  margin-left: 325px;
+  width: 30%;
+  height: 20%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-top: -1px;
+  font-size: 100%;
+  padding-right: 10%;
+}
+.home_footer .part_1 input{
+  margin-left: 70px;
+  width:21%;
+  height: 35px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.home_footer .part_1  ::placeholder{
+  text-align: left;
+  color: #E94042;
+}
+.home_footer .footers {
+  display: flex;
+ margin-top: -200px;
+ padding-top: 280px;
+ width: 65%;
+ height: 230px;
+ margin-left: 35%;
+}
+.home_footer .footers .part_2{
+display: inline-block;
+ margin-left: 3%;
+ height: 200px;
+ width: 21%;
+margin-top: -280px;
+
 }
 .home_footer h1{
   color: #fff;
   padding-top: 20%;
-  margin-left: 20%;
+  margin-left: 70px;
  
 }
 .home_footer h3 {
@@ -2294,13 +2564,14 @@ background-color: #F9F9F9;
 .home_footer h4 {
   color: #fff;
   font-size: 15px;
-  margin-left: 20%;
+  margin-left: 70px;
   padding-top: 10%;
   width: 100%;
 
 }
 .home_footer h5 {
   color: #fff;
+  
 }
 .home_footer button{
   margin-left: 94%;
@@ -2656,7 +2927,7 @@ nav .search_input Button{
   width: 1325px;
 }
 @media only screen and (max-width: 480px){
-.last_header .header .new_class {
+/* .last_header .header .new_class {
     display: block;
     margin-left: 320px;
     background-color: #fff;
@@ -2755,7 +3026,7 @@ margin-left: -12%;
 }
 .last_home .selected_btn Button{
 width: 87%;
-}
+} */
 /* .last_home .selected_items .card1{
   margin-left: -4%;
 }
@@ -2920,6 +3191,7 @@ nav .search_input{
   }
 }
 @media only screen and (min-width: 882px) {
+
   nav {
    margin-left: -170px;
 }
@@ -2948,11 +3220,25 @@ nav .menu{
 
 }
 @media only screen and (max-width: 882px) {
-    .last_home .close {
+  .last_home .services{
+    position: absolute;
+    margin-top: 120px;
+  }
+    .last_home .some_btn {
+      position: absolute;
+      top: -40px;
+       }
+  .last_home .body{
+    margin-top: 100px;
+  }
+  .last_home .right_side{
+    margin-top:-470px;
+  }
+ .last_home .close {
         display: block;
         
       }
-      .last_home .close .fa-solid{
+ .last_home .close .fa-solid{
         cursor: pointer;
       }
   .last_home .bars{
@@ -2997,7 +3283,41 @@ nav .search_input input{
     margin-right: 50px;
   }
 }
+@media only screen and (min-width: 768px) {
+  .last_home .package .content .btn Button {
+      margin-right: 50px;
+  }
+    .last_home .package .content .package_item {
+      margin-right:20px;
+    }
+}
 @media only screen and (max-width: 768px) {
+  .last_home .package {
+    height: 10%;
+  }
+  .last_home .package .content .btn Button{
+     margin-right: 10px;
+
+  }
+  .last_home .package .content .package_item .selected_cards{
+  margin-top: 10px;
+   width: 35%;
+  
+  }
+.last_home .package .content .package_item{
+  margin-top: -200px;
+  margin-left: 100px;
+   }
+ .last_home .package .content .last_btn {
+  margin-top: -135px;
+  }
+  .last_home .package .content .last_btn Button{
+    margin-left: 90%;
+  }
+  .last_home .some_btn {
+        position: absolute;
+        top: -730px;
+      }
   .last_home .last_side_nav {
       display: none;
     }
@@ -3036,8 +3356,67 @@ nav .icon {
     nav .search_input {
       margin-left:6%;
     }
+    
+}
+@media only screen and (max-width: 903px) {
+  .last_home .package .content .selected_cards h6 {
+    margin-top: 0px;
+
+    }
+.last_home .package .content .selected_cards p {
+    margin-left: 50%;
+    margin-top: -200px;
+  }
+}
+
+@media only screen and (max-width: 994px) {
+  .last_home .package .content .package_item{
+     margin-left: 200px;
+  }
+  .last_home .package .content .btn Button{
+    margin-left: -700px;
+  }
+  
+  .last_home .package .content .selected_cards p {
+      margin-left: 50%;
+      margin-top: -10px;
+  }
+
 }
 @media only screen and (max-width: 1068px) {
+  .last_home .package .content .last_btn{
+    margin-right: 15px;
+  }
+  .last_home .package .content .package_item {
+      margin-left: 170px;
+    
+     
+    }
+  .last_home .package .content .package_item .selected_cards {
+   
+     
+    }
+  .last_home .package .content .selected_cards p {
+      margin-left: 50%;
+      margin-top: -10px;
+    }
+     .last_home .package .content .btn Button{
+    margin-left: -750px;
+  
+  }
+.last_home .content .circular{
+  width: 250px;
+  height: 250px;
+  }
+  .last_home .content .circular img{
+    width: 350px;
+  }
+
+
+  .last_home .some_btn {
+    position: relative;
+    margin-top: 1300px;
+  }
   .last_home .close{
     display: block;
   }
@@ -3047,7 +3426,8 @@ nav .icon {
 
 .last_home .right_side {
   margin-left: 35%;
-  margin-top: 4%;
+  position: absolute;
+  top: 1250px;
   width: 50%;
   
 }
@@ -3068,13 +3448,15 @@ nav .icon {
 }
 
 .last_home .body{
-
-  margin-top: 30px;
+ position: absolute;
+ top: 160px;
+ height: 70%;
   margin-left: 25%;
   width: 70%;
 }
 .last_home .services{
-  margin-top: 10%;
+  position: absolute;
+    top: 1320px;
   }
   .last_home .services .card{
     width: 100%;
@@ -3085,10 +3467,14 @@ nav .icon {
   }
 }
 @media only screen and (min-width: 1068px) {
-
+.last_home .package .content .selected_cards p {
+    margin-left: 70%;
+    margin-top: -12px;
+  }
   .last_home .body{
     margin-top: -700px;
   }
+  
 .last_home .new_nav {
     display: block;
   }
@@ -3113,6 +3499,15 @@ nav .icon {
       margin-left: 10px;
     }
 
+}
+@media only screen and (max-width: 1100px) {
+.home_footer .part_1 input {
+  margin-left: 30px;
+width: 10%;
+}
+.home_footer .part_1 Button {
+  margin-left: 285px;
+}
 }
 @media only screen and (min-width: 1200px) {
   nav .icon {

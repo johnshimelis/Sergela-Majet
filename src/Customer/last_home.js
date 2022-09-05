@@ -52,11 +52,11 @@ function LastHome() {
 
   const toggleClass = () => {
     setSideNav(!isSideNav);
-    const side_nav = document.getElementsByClassName('last_side_nav');
-    const page_body = document.getElementsByClassName('body');
-    if(side_nav.style.display === "block"){
-      page_body.style.display = 'none';
-    }
+    // const side_nav = document.getElementsByClassName('last_side_nav');
+    // const page_body = document.getElementsByClassName('body');
+    // if(side_nav.style.display === "block"){
+    //   page_body.style.display = 'none';
+    // }
 
   
   };
@@ -182,7 +182,247 @@ function LastHome() {
         <p>ካሉበት ቦታ በነጻ ትራንስፖርት እናደርሳለን</p>
     </div>
   </div>
+</div>
+<div className='some_btn'>
+  <Button>ከተመረጡ ምድቦቻችን ይገብዩ!</Button>
+  </div>
+
+   <div className='selected_items'>
+          <Row gutter={[0,10]}>
+        <div className='selected_cards'>
+          
+         <img alt="PepsiCo" src={image9} /> 
+        
+          
+           {/* <p>የንጽህና መጠበቂያዎች</p> */}
+        <div className='names'>
+        <p>የንጽህና መጠበቂያዎች</p>
+      </div>
         </div>
+        
+         
+  <div className='selected_cards'>
+         <img alt="PepsiCo" src={image10} />
+           {/* <p>እህል እና ጥራጥሬ</p> */}
+           <div className='names'>
+        <p>እህል እና ጥራጥሬ</p>
+      </div>
+          </div>
+         
+
+ <div className='selected_cards'>
+      <img alt="PepsiCo" src={image11} />
+             
+    {/* <p>መጠጦች</p> */}
+        <div className='names'>
+        <p>መጠጦች</p>
+      </div>  
+       </div>
+      
+        
+<div className='selected_cards'>
+       <img alt="PepsiCo" src={image12} />
+   <div className='names'>
+        <p>ቦርሳዎች</p>
+      </div>        
+</div>
+
+ {/* <p>ቦርሳዎች</p> */}
+   <div className='selected_cards'>
+       <img alt="PepsiCo" src={image13} />
+       <span><img src={image14} /></span> 
+        <div className='names'>
+        <p>ልብስና ጫማ</p>
+      </div>  
+      </div>
+     
+       
+        </Row>
+         </div>
+          <div className='banner'>
+          <img src={image15} />
+          <p>የቤት አስቤዛዎን ከአንድ ቦታ ሳይንገላቱ ይሸምቱ!</p>
+        </div>
+ <div className='high_rating'>
+          <h6>በጣም የተሸጡ እቃዎች </h6>
+          <Row gutter={[0,10]}>
+            <div className='high_rating_img'>
+               <img alt="PepsiCo" src={image16} /> 
+               <div className='high_rating_name'>
+                <p>ሽንኩርት</p>
+                <p>43 ብር</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+
+               <div className='high_rating_img'>
+               <img alt="PepsiCo" src={image16} /> 
+               <div className='high_rating_name'>
+                <p>ሽንኩርት</p>
+                <p>43 ብር</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+
+               <div className='high_rating_img'>
+               <img alt="PepsiCo" src={image16} /> 
+               <div className='high_rating_name'>
+                <p>ሽንኩርት</p>
+                <p>43 ብር</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+
+               <div className='high_rating_img'>
+               <img alt="PepsiCo" src={image16} /> 
+               <div className='high_rating_name'>
+                <p>ሽንኩርት</p>
+                <p>43 ብር</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+
+               <div className='high_rating_img'>
+               <img alt="PepsiCo" src={image16} /> 
+               <div className='high_rating_name'>
+                <p>ሽንኩርት</p>
+                <p>43 ብር</p>
+                <Rate className='rate'  
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+          
+        </Row>
+        </div>
+
+      <div className='package'>
+          <div className='content'>
+          <h3>የእቃ ጥቅሎች</h3>
+          <p>እንዚህን ጥቅሎች በቅናሽ ዋጋ ይሸምቱ!</p>
+          <div className='btn'>
+          <Button >
+            <i  class="fa-solid fa-angle-left"></i>
+            </Button>
+          </div>
+          <Row gutter={[0,10]}>
+          <div className='package_item'>
+           <div className='selected_cards'>
+              <img alt="PepsiCo" src={image25} />
+                <div className='names'>
+                  <h6>መጠጥና የቺብስ ጥቅል</h6>
+                  <p>78 ብር</p>
+                 </div>        
+            </div>
+            <div className='selected_cards'>
+              <img alt="PepsiCo" src={image26} />
+                <div className='names'>
+                  <h6>መጠጥና የቺብስ ጥቅል</h6>
+                  <p>78 ብር</p>
+                 </div>        
+            </div>
+              <div className='selected_cards'>
+              <img alt="PepsiCo" src={image27} />
+                <div className='names'>
+                  <h6>መጠጥና የቺብስ ጥቅል</h6>
+                  <p>78 ብር</p>
+                 </div>        
+            </div>
+              <div className='selected_cards'>
+              <img alt="PepsiCo" src={image28} />
+                <div className='names'>
+                  <h6>መጠጥና የቺብስ ጥቅል</h6>
+                  <p>78 ብር</p>
+                 </div>        
+            </div>
+            </div>
+     
+           </Row>
+        <div className='last_btn'>
+                <Button>
+                 <i class="fa-solid fa-angle-right"></i>
+               </Button>
+        </div>
+          </div>
+        </div>
+         <div className='discounts'>
+          <h2>የዛሬ ልዩ ቅናሾች</h2>
+          <Row gutter={[0,10]}>
+          <div className='discount_img'>
+            <img src={image21} />
+          </div>
+           <div className='discount_img'>
+            <img src={image22} />
+          </div>
+           <div className='discount_img'>
+            <img src={image23} />
+          </div>
+        </Row>
+      </div>
+      <div className='for_womens'>
+        <img src={image24} />
+        <h2>የክረምት ልብሶች ለሴቶች በቅናሽ</h2>
+      </div>
+
+      <div className='cloths'>
+          <h6>በጣም የተሸጡ እቃዎች </h6>
+          <Row gutter={[0,10]}>
+            <div className='cloths_img'>
+               <img alt="PepsiCo" src={image30} /> 
+               <div className='cloths_name'>
+                <p>ተከፋች ሹራብ</p>
+                <p>430 ብር</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+
+               <div className='cloths_img'>
+               <img alt="PepsiCo" src={image31} /> 
+               <div className='cloths_name'>
+                <p>ጋውን</p>
+                <p>588 ብር</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+
+               <div className='cloths_img'>
+               <img alt="PepsiCo" src={image32} /> 
+               <div className='cloths_name'>
+                <p>ሹራብ</p>
+                <p>700 ብር</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+
+               <div className='cloths_img'>
+               <img alt="PepsiCo" src={image33} /> 
+               <div className='cloths_name'>
+                <p>ካፖርት</p>
+                <p>658 ብር</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+
+               <div className='cloths_img'>
+               <img alt="PepsiCo" src={image34} /> 
+               <div className='cloths_name'>
+                <p>ጃኬት</p>
+                <p>430 ብር</p>
+                <Rate className='rate'  
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+          
+        </Row>
+        </div>
+        <HomeFooter />
 
 </div>
 
