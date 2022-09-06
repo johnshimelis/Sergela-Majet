@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import api from '../adapter/base'
 import LastHeader from '../components/last_header';
 import LastSideNav from '../components/side_nav';
 import { Button, Carousel,Card, Col, Row, Rate,  } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import HomeFooter from './home_footer';
 import image1 from '../images/sunchips.png';
 import image2 from '../images/user.png';
@@ -42,27 +44,47 @@ import image32 from '../images/cloth3.png';
 import image33 from '../images/cloth4.png';
 import image34 from '../images/cloth5.png';
 
-
-
-
-
-
 function LastHome() {
   const [isSideNav, setSideNav] = useState(false);
-
+  const usenav=useNavigate();
   const toggleClass = () => {
     setSideNav(!isSideNav);
-    // const side_nav = document.getElementsByClassName('last_side_nav');
-    // const page_body = document.getElementsByClassName('body');
-    // if(side_nav.style.display === "block"){
-    //   page_body.style.display = 'none';
-    // }
-
-  
-  };
+   };
   const close = () =>{
    setSideNav(!isSideNav);
   }
+  const [categories, setCategories] = useState();
+  const [highly_paid, setHighlyPaid] = useState();
+  const [packages, setPackage] = useState();
+  useEffect(()=>{
+    api.get('/categories')
+    .then(res=>{
+      setCategories(res.data.data.slice(0,5));
+    })
+    .catch(err=>{
+      console.log('Error happened')
+    });
+    api .get('/popular-products')
+    .then(res=>{
+      setHighlyPaid(res.data.data.slice(0,5));
+     
+    })
+    .catch(err=>{
+      console.log("Error Occured")
+    });
+    api.get('/packages')
+    .then(res=>{
+      setPackage(res.data.data.slice(0,5));
+    
+    })
+    .catch(err=>{
+      console.log('Error Occured');
+    })
+
+  },[]);
+
+
+  
   return (
     <div className='last_home'>
         
@@ -188,56 +210,21 @@ function LastHome() {
   </div>
 
    <div className='selected_items'>
-          <Row gutter={[0,10]}>
-        <div className='selected_cards'>
-          
-         <img alt="PepsiCo" src={image9} /> 
-        
-          
-           {/* <p>የንጽህና መጠበቂያዎች</p> */}
-        <div className='names'>
-        <p>የንጽህና መጠበቂያዎች</p>
+        {
+            categories?.map(category=>{
+              return(
+             <div className='selected_cards' onClick={()=>{usenav('/all_products',{state:{id:category.id}})}}>
+              <img alt="PepsiCo" src={category.image_path } /> 
+           <div className='names'>
+        <p>{category.name}</p>
       </div>
         </div>
+              )
+            })
+          }
         
-         
-  <div className='selected_cards'>
-         <img alt="PepsiCo" src={image10} />
-           {/* <p>እህል እና ጥራጥሬ</p> */}
-           <div className='names'>
-        <p>እህል እና ጥራጥሬ</p>
-      </div>
-          </div>
-         
-
- <div className='selected_cards'>
-      <img alt="PepsiCo" src={image11} />
-             
-    {/* <p>መጠጦች</p> */}
-        <div className='names'>
-        <p>መጠጦች</p>
-      </div>  
-       </div>
-      
         
-<div className='selected_cards'>
-       <img alt="PepsiCo" src={image12} />
-   <div className='names'>
-        <p>ቦርሳዎች</p>
-      </div>        
-</div>
-
- {/* <p>ቦርሳዎች</p> */}
-   <div className='selected_cards'>
-       <img alt="PepsiCo" src={image13} />
-       <span><img src={image14} /></span> 
-        <div className='names'>
-        <p>ልብስና ጫማ</p>
-      </div>  
-      </div>
-     
        
-        </Row>
          </div>
           <div className='banner'>
           <img src={image15} />
@@ -245,61 +232,27 @@ function LastHome() {
         </div>
  <div className='high_rating'>
           <h6>በጣም የተሸጡ እቃዎች </h6>
-          <Row gutter={[0,10]}>
-            <div className='high_rating_img'>
-               <img alt="PepsiCo" src={image16} /> 
-               <div className='high_rating_name'>
-                <p>ሽንኩርት</p>
-                <p>43 ብር</p>
-                <Rate className='rate' 
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-
-               <div className='high_rating_img'>
-               <img alt="PepsiCo" src={image16} /> 
-               <div className='high_rating_name'>
-                <p>ሽንኩርት</p>
-                <p>43 ብር</p>
-                <Rate className='rate' 
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-
-               <div className='high_rating_img'>
-               <img alt="PepsiCo" src={image16} /> 
-               <div className='high_rating_name'>
-                <p>ሽንኩርት</p>
-                <p>43 ብር</p>
-                <Rate className='rate' 
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-
-               <div className='high_rating_img'>
-               <img alt="PepsiCo" src={image16} /> 
-               <div className='high_rating_name'>
-                <p>ሽንኩርት</p>
-                <p>43 ብር</p>
-                <Rate className='rate' 
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-
-               <div className='high_rating_img'>
-               <img alt="PepsiCo" src={image16} /> 
-               <div className='high_rating_name'>
-                <p>ሽንኩርት</p>
-                <p>43 ብር</p>
-                <Rate className='rate'  
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
           
-        </Row>
+            {
+         highly_paid?.map(popular_products=>{
+          return(
+              <div className='high_rating_img'>
+               <img alt="PepsiCo" src={popular_products.image_paths} /> 
+               <div className='high_rating_name'>
+                <p>{popular_products.name}</p>
+                <p>{popular_products.price} br</p>
+                <Rate className='rate' 
+                allowHalf defaultValue={2.5} />
+               </div>
+           </div>
+          )
+         })}
+
+               
         </div>
 
       <div className='package'>
+        
           <div className='content'>
           <h3>የእቃ ጥቅሎች</h3>
           <p>እንዚህን ጥቅሎች በቅናሽ ዋጋ ይሸምቱ!</p>
@@ -308,39 +261,24 @@ function LastHome() {
             <i  class="fa-solid fa-angle-left"></i>
             </Button>
           </div>
-          <Row gutter={[0,10]}>
-          <div className='package_item'>
+                <div className='package_item'>
+         
+            {packages?.map(pack=>{
+              return(
            <div className='selected_cards'>
-              <img alt="PepsiCo" src={image25} />
+              <img alt="PepsiCo" src={image10} />
                 <div className='names'>
-                  <h6>መጠጥና የቺብስ ጥቅል</h6>
-                  <p>78 ብር</p>
+                  <h6>{pack.name}</h6>
+                  <p>{pack.price} ብር</p>
                  </div>        
             </div>
-            <div className='selected_cards'>
-              <img alt="PepsiCo" src={image26} />
-                <div className='names'>
-                  <h6>መጠጥና የቺብስ ጥቅል</h6>
-                  <p>78 ብር</p>
-                 </div>        
+            )
+
+        })}
             </div>
-              <div className='selected_cards'>
-              <img alt="PepsiCo" src={image27} />
-                <div className='names'>
-                  <h6>መጠጥና የቺብስ ጥቅል</h6>
-                  <p>78 ብር</p>
-                 </div>        
-            </div>
-              <div className='selected_cards'>
-              <img alt="PepsiCo" src={image28} />
-                <div className='names'>
-                  <h6>መጠጥና የቺብስ ጥቅል</h6>
-                  <p>78 ብር</p>
-                 </div>        
-            </div>
-            </div>
-     
-           </Row>
+
+        
+           
         <div className='last_btn'>
                 <Button>
                  <i class="fa-solid fa-angle-right"></i>
@@ -368,7 +306,6 @@ function LastHome() {
       </div>
 
       <div className='cloths'>
-          <h6>በጣም የተሸጡ እቃዎች </h6>
           <Row gutter={[0,10]}>
             <div className='cloths_img'>
                <img alt="PepsiCo" src={image30} /> 

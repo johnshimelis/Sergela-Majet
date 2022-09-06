@@ -1,35 +1,42 @@
-import React from 'react'
-import image_1 from '../images/product_1.png';
-import image_2 from '../images/product_2.png';
-import image_3 from '../images/product_3.png';
-import image_4 from '../images/product_4.png';
-import image_5 from '../images/product_5.png';
-import image_6 from '../images/product_6.png';
-import image_7 from '../images/product_7.png';
-import image_8 from '../images/product_8.png';
-import image_9 from '../images/product_9.png';
-import image_10 from '../images/product_10.png';
+import React,{useEffect,useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Card } from 'antd';
+import api from '../adapter/base'
 import { Row, Col, Slider } from 'antd';
-
+import {useLocation} from 'react-router-dom';
 const { Meta } = Card;
-
 export default function AllProduct() {
+  const loc=useLocation();
+  const navigate=useNavigate();
+  const [products,setProducts]=useState()
+  const [category,setCategory]=useState()
+  useEffect(()=>{
+     api.get(`categories/${loc.state.id}/products`).then(res=>{
+       setProducts(res.data.data);
+     }).catch(err=>{
+      console.log('some error happened');
+     });
+     api.get(`categories/${loc.state.id}`).then(res=>{
+      setCategory(res.data.data);
+     }).catch(err=>{console.log('some error happened')})
+  },[loc.state.id])
   return (
 <div className='container-fluid'>
     <div className='all_products' style={{height:1100}}>
- 
     <div className="all_product">
     <Row gutter={[0, 200]}>
 
         <Col span={6}>
-          <Card
+          {products?.map(product=>{
+            return(
+             <Card
            hoverable
            style={{ width: 214, height: 214 }}
-           cover={<img alt="ካሮት" src={image_2} />}
+           cover={<img alt="products" src={product.image_paths[0]} />}
+           onClick={()=>{navigate('/main_page',{state:{id:product.id}})}}
              >  
                
-           <Meta title="ካሮት"/>
+           <Meta title={product.name}/>
             <div className="stars">
            <i class="fa-solid fa-star"></i>
            <i class="fa-solid fa-star"></i>
@@ -44,206 +51,22 @@ export default function AllProduct() {
              </div>
             </Card>
            
-           <p>23br</p>
+           <p>{product.price}</p>
             
           </Card>
+            )
+          })}
+          
         </Col>
-        <Col span={6}>
-          <Card
-           hoverable
-           style={{ width: 214, height: 214 }}
-           cover={<img alt="አስቤዛ" src={image_3} />}
-             >  
-               
-           <Meta title="አስቤዛ"/>
-            <div className="stars">
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-          </div>
-          <Card 
-           style={{background:'#F0F0F0', width:40, height: 40, marginLeft:150, marginTop:10}}>
-            <div className="bag">
-            <i class="fa-solid fa-bag-shopping"></i>
-             </div>
-            </Card>
-           
-           <p>23br</p>
-            
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card
-           hoverable
-           style={{ width: 214, height: 214 }}
-           cover={<img alt="አስቤዛ ትልቅ ቤተሰብ" src={image_4} />}
-             >  
-               
-           <Meta title="አስቤዛ ትልቅ ቤተሰብ"/>
-            <div className="stars">
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-          </div>
-           <Card 
-           style={{background:'#F0F0F0', width:40, height: 40, marginLeft:150, marginTop:10}}>
-            <div className="bag">
-            <i class="fa-solid fa-bag-shopping"></i>
-             </div>
-            </Card>
-           
-           <p>23br</p>
-            
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card
-           hoverable
-           style={{ width: 214, height: 214 }}
-           cover={<img alt="Fanta" src={image_5} />}
-             >  
-               
-           <Meta title="Fanta"/>
-            <div className="stars">
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-          </div>
-           <Card 
-           style={{background:'#F0F0F0', width:40, height: 40, marginLeft:150, marginTop:10}}>
-            <div className="bag">
-            <i class="fa-solid fa-bag-shopping"></i>
-             </div>
-            </Card>
-           
-           <p>23br</p>
-            
-          </Card>
-        </Col>
-
-        
-  </Row>
-     <Row gutter={[0, 200]} style={{marginTop:150}}>
-       <Col span={6}>
-          <Card
-           hoverable
-           style={{ width: 214, height: 214 }}
-           cover={<img alt="PepsiCo" src={image_6} />}
-             >  
-               
-           <Meta title="PepsiCo"/>
-            <div className="stars">
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-          </div>
-          <Card 
-           style={{background:'#F0F0F0', width:40, height: 40, marginLeft:150, marginTop:10}}>
-            <div className="bag">
-            <i class="fa-solid fa-bag-shopping"></i>
-             </div>
-            </Card>
-           
-           <p>23br</p>
-            
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card
-           hoverable
-           style={{ width: 214, height: 214 }}
-           cover={<img alt="Brisk" src={image_7} />}
-             >  
-               
-           <Meta title="Brisk"/>
-            <div className="stars">
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-          </div>
-          <Card 
-           style={{background:'#F0F0F0', width:40, height: 40, marginLeft:150, marginTop:10}}>
-            <div className="bag">
-            <i class="fa-solid fa-bag-shopping"></i>
-             </div>
-            </Card>
-           
-           <p>23br</p>
-          </Card>
-        </Col>
-    
-        <Col span={6}>
-          <Card
-           hoverable
-           style={{ width: 214, height: 214 }}
-           cover={<img alt="Smarties" src={image_9} />}
-             >  
-               
-           <Meta title="Smarties"/>
-            <div className="stars">
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-          </div>
-           <Card 
-           style={{background:'#F0F0F0', width:40, height: 40, marginLeft:150, marginTop:10}}>
-            <div className="bag">
-            <i class="fa-solid fa-bag-shopping"></i>
-             </div>
-            </Card>
-           
-           <p>23br</p>
-            
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card
-           hoverable
-           style={{ width: 214, height: 214 }}
-           cover={<img alt="Doritos" src={image_10} />}
-             >  
-               
-           <Meta title="Doritos"/>
-            <div className="stars">
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-           <i class="fa-solid fa-star"></i>
-          </div>
-          <Card 
-           style={{background:'#F0F0F0', width:40, height: 40, marginLeft:150, marginTop:10}}>
-            <div className="bag">
-            <i class="fa-solid fa-bag-shopping"></i>
-             </div>
-            </Card>
-           
-           <p>23br</p>
-            
-          </Card>
-        </Col>
-        
   </Row>
          
      </div>
-     <p style={{marginLeft:400, marginTop:-680}}>15 ውጤቶችን አግኝተናል ።</p>
+     <p style={{marginLeft:400, marginTop:-680}}>{products?.length} ውጤቶችን አግኝተናል ።</p>
      <Row gutter={[0, 8]}>
        <div className='top'>
        <Col span={6}>
          <div className='h5'>
-       <h5>ምግብና መጠጥ</h5>
+       <h5>{category?.name}</h5>
        </div>
        </Col>
        

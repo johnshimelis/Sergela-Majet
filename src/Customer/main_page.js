@@ -1,10 +1,12 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import 'antd/dist/antd.css'; 
 import { Card, Col, Row } from 'antd';
 import AppHeader2 from '../components/header 2';
 import AppFooter from '../components/footer';
 import { Button } from 'antd';
+import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import image_6 from '../images/product_6.png';
 import image_7 from '../images/product_7.png';
 import image_8 from '../images/product_8.png';
@@ -13,18 +15,34 @@ import image_10 from '../images/product_10.png';
 import image_11 from '../images/product_11.png';
 import product1_image from '../images/product1.png';
 import product2_image from '../images/product2.png';
-import { useNavigate } from "react-router-dom";
 import CompanyRegister from '../drawer/company_register';
 import CartPage from './cart_page';
+import api from '../adapter/base'
 
 const { Header, Content, Footer } = Layout;
 const { Meta } = Card;
 
 export default function MainPage() {
   const navigate  = useNavigate();
-  function cartPage(){
-    navigate('/cart_page');
+  const [product,setProduct]=useState();
+  const [counter,setCounter]=useState(1);
+  const loc=useLocation();
+
+  function increase(){
+    setCounter(counter=>counter+1);
   }
+
+  function decrease(){
+    setCounter(counter=>counter-1);
+  }  
+  
+  useEffect(()=>{
+      api.get(`products/${loc.state.id}`)
+      .then(res=>{setProduct(res.data.data)})
+      .catch(err=>{console.log('somewhere error happened')})
+  },
+  [loc.state.id]);
+
   return (
     <div className='main_page'> 
        <div className='container-fluid'>
@@ -32,45 +50,50 @@ export default function MainPage() {
         <Content className="site-layout">
         <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>ዋና ገጽ</Breadcrumb.Item>
-        <Breadcrumb.Item>አስቤዛ መካከለኛ ቤተሰብ</Breadcrumb.Item>
+        <Breadcrumb.Item>{product?.name}</Breadcrumb.Item>
        
       </Breadcrumb>
       </Content> 
       <div className='page_card'>
+        {/* {product?.image_paths.forEach(path=>{
+          
+          return(
+          <Card className='first_card'
+           hoverable
+           style={{ width: 100, height: 100 }}
+           cover={<img src={path}/>}
+           >
+           </Card>)
+        })} */}
         <Card className='first_card'
+          
            hoverable
            style={{ width: 100, height: 100 }}
+           cover={<img src={product?.image_paths[2]}/>}
            >
            </Card>
-
-          <Card className='second_card'
+           <Card className='first_card'
+          
            hoverable
            style={{ width: 100, height: 100 }}
-           >
-           </Card>
-
-          <Card className='third_card'
-           hoverable
-           style={{ width: 100, height: 100 }}
+           cover={<img src={product?.image_paths[1]}/>}
            >
            </Card>
              <Card className='fourth_card'
            hoverable
            style={{ width: 620, height: 499 }}
+           cover={<img src={product?.image_paths[0]}/>}
            >
            </Card>
       </div>
       <div className='asbeza'>
-          <h1>አስቤዛ መካከለኛ ቤተሰብ</h1>
+          <h1>{product?.name}</h1>
 
-           <h2>5,893</h2>
+           <h2>{product?.price}</h2>
            <div className='birr'>
           <h5>ብር</h5>
           </div>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-               Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make 
-                a type specimen book.</p>
+          <p>{product?.description}</p>
 
       </div>
       <div className='colors'>
@@ -111,17 +134,16 @@ export default function MainPage() {
       <div className='buttons'>
         
           <div className='main_btn'>
-              
-              <Button style={{background: '#F0F0F0'}}>+</Button>
+              <Button style={{background: '#F0F0F0'}} onClick={()=>{increase()}}>+</Button>
           </div>
        <div className='sub_1'>
-              <Button style={{background: '#F0F0F0'}}>-</Button>
+              <Button style={{background: '#F0F0F0'}} onClick={()=>{decrease()}}>-</Button>
 
         </div>
-            <p>1</p>
+            <p>{counter}</p>
         </div>
         <div className='last_button'>
-          <Button className='primary' onClick={cartPage}  style={{background: '#F4AD33'}}><span><i class="fa-solid fa-magnifying-glass"></i></span>ዘንቢል ዉስጥ ያስገቡ </Button>
+          <Button className='primary' onClick={()=>{navigate('/cart_page',{state:{counter:counter,product:product}})}}  style={{background: '#F4AD33'}}><span><i class="fa-solid fa-magnifying-glass"></i></span>ዘንቢል ዉስጥ ያስገቡ </Button>
           <Button className='secondary'>ለወደፊት ያስቀምጡ</Button>
         </div>
 

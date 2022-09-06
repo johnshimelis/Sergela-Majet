@@ -1039,6 +1039,7 @@ input[type="text"][value="50 "] {
 .last_home .selected_items{
   margin-top: 20px;
   margin-left: 2.3%;
+  background-color: #EEEEEE;
   width: 95%;
 
 
@@ -1054,35 +1055,23 @@ input[type="text"][value="50 "] {
 
 
 .last_home .selected_items .selected_cards{
-  background-color: #F5F5F5;
+  background-color: #fff;
   display: inline-block;
   height: 150px;
-    margin-top: 20px;
+    margin-top: 50px;
     border-radius: 10px;
     width: 18%;
     margin-left: 1.5%;
    
   }
   .last_home .selected_items .selected_cards img{
-   width: 80%;
-  height: 90%;
-  margin-left: 4%;
-  }
- .last_home .selected_items .selected_cards:nth-child(5)  img{
-  margin-left: -5%;
-  margin-top: 10px;
+   width: 70%;
   height: 80%;
-   width: 60%;
-    }
-  .last_home .selected_items .selected_cards:nth-child(5) span img{
-  width: 60%;
-  margin-left: 40%;
-  margin-top: -150px;
-}
- .last_home .selected_items .selected_cards:nth-child(5) .names {
-  margin-top: -15px;
-    
-}
+  margin-left: 10%;
+  padding-top: 5%;
+ 
+  }
+
 .last_home .selected_items .selected_cards .names p{
   padding-top: 20px;
 }
@@ -1141,22 +1130,26 @@ margin-left: 7%;
   width: 100%;
 }
 .last_home .high_rating .high_rating_img{
-  background-color: #EEEEEE;
+  
+  display: inline-block;
   margin-left: 3%;
   margin-top: 2%;
   width: 16%;
-  height: 160px;
+  height: 200px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 .last_home .high_rating_img img{
-  width: 70%;
-  margin-left: 20px;
+  width: 100%;
+  height: 80%;
+  margin-left: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
  
   
 }
 .last_home .high_rating .high_rating_name{
-  background-color: #fff;
+  background-color: #EEEEEE;
   padding-bottom: 30px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
