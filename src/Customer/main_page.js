@@ -45,7 +45,7 @@ export default function MainPage() {
 
   return (
     <div className='main_page'> 
-       <div className='container-fluid'>
+      
            <AppHeader2 text="What are you looking for?" button_text="Join now"/>
         <Content className="site-layout">
         <Breadcrumb style={{ margin: '16px 0' }}>
@@ -65,26 +65,20 @@ export default function MainPage() {
            >
            </Card>)
         })} */}
-        <Card className='first_card'
+        <div className='first_card'>
           
-           hoverable
-           style={{ width: 100, height: 100 }}
-           cover={<img src={product?.image_paths[2]}/>}
-           >
-           </Card>
-           <Card className='first_card'
-          
-           hoverable
-           style={{ width: 100, height: 100 }}
-           cover={<img src={product?.image_paths[1]}/>}
-           >
-           </Card>
-             <Card className='fourth_card'
-           hoverable
-           style={{ width: 620, height: 499 }}
-           cover={<img src={product?.image_paths[0]}/>}
-           >
-           </Card>
+          <img src={product?.image_paths[0]}/>
+         </div>
+          <div className='first_card'>
+          <img src={product?.image_paths[1]}/>
+         </div>
+          <div className='first_card'>
+          <img src={product?.image_paths[2]}/>
+         </div>
+          <div className='fourth_card'>
+          <img src={product?.image_paths[0]}/>
+         </div>
+       
       </div>
       <div className='asbeza'>
           <h1>{product?.name}</h1>
@@ -98,7 +92,7 @@ export default function MainPage() {
       </div>
       <div className='colors'>
           <h4>ቀለም</h4>
-          <div className='all_colors'>
+   <div className='all_colors'>
     <Row gutter={[0, 0]}>
        <Col span={2}>
           <Card
@@ -147,7 +141,7 @@ export default function MainPage() {
           <Button className='secondary'>ለወደፊት ያስቀምጡ</Button>
         </div>
 
-    <div className='main_products'>
+    {/* <div className='main_products'>
        <Row gutter={[0, 200]}>
        <Col span={4}>
           <Card
@@ -329,8 +323,8 @@ export default function MainPage() {
        </div>
        <div className='footer'>
        <AppFooter />
-       </div>
-       </div>
+       </div> */}
+      
     </div>
   )
 }

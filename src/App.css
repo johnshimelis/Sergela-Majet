@@ -298,56 +298,73 @@ hr
   width: 100%;
   height: 1000px;
 }
-.all_product
-{
-  margin-top: 150px;
-  margin-left:320px;
-  padding-top: 150px;
+.all_products .all_product{
+  width: 15%;
+  margin-top: 10px;
+  height: 140px;
   background-color: #FAFAFA;
+  display: inline-block;
+  margin-left: 20px;
+  border-radius: 10px;
+
 }
-.all_products p{
-  margin-left: -10px;
-  margin-top: -730px;
-  font-size: 20px;
- 
+.all_products .all_product img{
+width: 100%;
+height: 140px;
+border-radius: 10px;
 }
-.all_product img
-{
-   width: 210px;
-   height: 210px;
-   margin-top: -1px;
-   margin-left: 1px;
+.all_products .all_product h6{
+  margin-top: 10px;
+  margin-left: 10px;
 }
-.all_product title
-{
-  margin-left: -200px;
+.category{
+ margin-top: 100px;
+ margin-left: 50px;
 }
-.all_product .stars
-{
-  margin-left: -21px;
-  
+.suppliers .all_suppliers {
+  padding-top: 50px;
+  background-color: #FAFAFA;
+  margin-top: 100px;
+  height: 300px;
 }
-.all_product .stars .fa-solid
-{
-color: #F4AD33;
-margin-left: 20px;
-margin-top: 20px;
+.suppliers .all_suppliers h6{
+margin-left: 31px;
 }
-.all_product p
-{
-   margin-top: -32px;
+
+.suppliers .all_suppliers .each_suppliers{
+  background-color: #DFE0EB;
+  display: inline-block;
+  border-radius: 10px;
+  height: 150px;
+ margin-left: 30px;
+  width: 15%;
 }
-.all_product .bag 
-{
-  margin-top: -20px;
-  margin-left: -190px;
-  
-  
+.suppliers .all_suppliers .each_suppliers img{
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
 }
-.all_product col
-{
-  margin-left: -200px;
+.suppliers .all_suppliers .each_suppliers h5{
+  padding-top: 10px;
+  text-align: center;
 }
+
+.category h5{
+  margin-left: 30px;
+  font-weight: bold;
+  font-size: 30px;
+}
+.category h6{
+  margin-top: -40px;
+  margin-left: 300px;
+}
+.all_products .all_product p{
+ text-align:left;
+  margin-left:5px;
+}
+
+
+
 /* Footer */
 .footer .part_1
 {
@@ -467,6 +484,27 @@ font-weight: bold;
   background-color: #fff;
   color: #000;
   font-weight: bold;
+}
+.main_page .page_card .first_card{
+display: block;
+background-color: #fff;
+width: 12%;
+height: 150px;
+}
+.main_page .page_card .fourth_card{
+  height: 600px;
+  width: 45%;
+  margin-left: 180px;
+  margin-top: -480px;
+}
+.main_page .page_card .fourth_card img{
+  height: 600px;
+    width: 100%;
+}
+.main_page .page_card .first_card img{
+  margin-left: 0px;
+  width: 100%;
+  height: 150px;
 }
 .main_page .site-layout{
   margin-top: -1850px;
@@ -1052,7 +1090,16 @@ input[type="text"][value="50 "] {
 
 
 }
+.categories .selected_cards {
+  background-color: #fff;
+  display: inline-block;
+  height: 150px;
+  margin-top: 50px;
+  border-radius: 10px;
+  width: 18%;
+  margin-left: 1.5%;
 
+}
 
 .last_home .selected_items .selected_cards{
   background-color: #fff;
@@ -1064,6 +1111,25 @@ input[type="text"][value="50 "] {
     margin-left: 1.5%;
    
   }
+  .categories h5{
+    
+  }
+  
+  .categories{
+    
+    margin-top: 20px;
+      margin-left: 2.3%;
+      background-color: #EEEEEE;
+      width: 95%;
+      height: 250px;
+     
+  }
+    .categories .selected_cards img {
+      width: 70%;
+      height: 80%;
+      margin-left: 10%;
+      padding-top: 5%;
+  }
   .last_home .selected_items .selected_cards img{
    width: 70%;
   height: 80%;
@@ -1071,9 +1137,15 @@ input[type="text"][value="50 "] {
   padding-top: 5%;
  
   }
+  .categories .selected_cards .names p {
+    padding-top: 50px;
+    text-align: center;
+    margin-left: -60px;
+  }
 
 .last_home .selected_items .selected_cards .names p{
   padding-top: 20px;
+  
 }
 
 .last_home .cloths{
