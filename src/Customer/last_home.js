@@ -261,7 +261,7 @@ function LastHome() {
             <i  class="fa-solid fa-angle-left"></i>
             </Button>
           </div>
-                <div className='package_item'>
+          <div className='package_item'>
          
             {packages?.map(pack=>{
               return(

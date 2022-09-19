@@ -1,4 +1,15 @@
-
+.last_header .search_input .badge {
+  background-color: #E94042;
+  height: 20px;
+  border-radius: 100%;
+}
+.last_header .search_input .fa-solid{
+  cursor: pointer;
+}
+.last_header .search_input .badge p{
+border-radius: 100%;
+font-size: 14px;
+}
 .ant-menu>.ant-menu-item{
 left: 1000px;
 margin-top: 220px;
@@ -300,7 +311,7 @@ hr
 }
 .all_products .all_product{
   width: 15%;
-  margin-top: 10px;
+  margin-top: 20px;
   height: 140px;
   background-color: #FAFAFA;
   display: inline-block;
@@ -318,7 +329,7 @@ border-radius: 10px;
   margin-left: 10px;
 }
 .category{
- margin-top: 100px;
+ margin-top: 200px;
  margin-left: 50px;
 }
 .suppliers .all_suppliers {
@@ -1092,14 +1103,25 @@ input[type="text"][value="50 "] {
 }
 .categories .selected_cards {
   background-color: #fff;
-  display: inline-block;
+  display: inline;
   height: 150px;
-  margin-top: 50px;
   border-radius: 10px;
+  margin-top: -20px;
   width: 18%;
-  margin-left: 1.5%;
+  
+  }
+  .categories .selected_cards ul li {
+    list-style: none;
+    display: flex;
+    font-size: 20px;
+    
+  }
 
-}
+ .categories .selected_cards ul {
+  display: inline-block;
+  margin-left: 100px;
+
+ }
 
 .last_home .selected_items .selected_cards{
   background-color: #fff;
@@ -1111,17 +1133,18 @@ input[type="text"][value="50 "] {
     margin-left: 1.5%;
    
   }
-  .categories h5{
-    
+  .categories h4{
+    margin-left:40px;
+    margin-top: 100px;
   }
   
   .categories{
     
     margin-top: 20px;
-      margin-left: 2.3%;
-      background-color: #EEEEEE;
-      width: 95%;
-      height: 250px;
+    margin-left: 2.3%;
+    
+    width: 95%;
+    height: 250px;
      
   }
     .categories .selected_cards img {
@@ -1137,6 +1160,9 @@ input[type="text"][value="50 "] {
   padding-top: 5%;
  
   }
+  .categories .selected_cards{
+    margin-top: 10px;
+  }
   .categories .selected_cards .names p {
     padding-top: 50px;
     text-align: center;
@@ -1145,7 +1171,16 @@ input[type="text"][value="50 "] {
 
 .last_home .selected_items .selected_cards .names p{
   padding-top: 20px;
-  
+  }
+.last_home .package .package_item .selected_cards .names h6{
+  margin-left: 3%;
+}
+.last_home .package .package_item .selected_cards .names p{
+  margin-top: -10%;
+  margin-left: 50%;
+}
+.last_home .package .package_item .selected_cards{
+
 }
 
 .last_home .cloths{
@@ -1238,8 +1273,14 @@ margin-left: 7%;
 .last_home .package .content{
 margin-top: 200px;
 }
+
+.last_home .package .content .package_item .selected_cards{
+
+
+
+}
 .last_home .package .content .btn Button{
-  margin-left: -520px;
+  margin-left: -550px;
   background-color: #D9D9D9;
   color: #000;
   font-size: 150%;
@@ -1278,6 +1319,9 @@ margin-top: -100px;
     border-radius: 10px;
     width: 21.5%;
     margin-left: 2%;
+}
+.last_home .package .content .package_item .selected_cards{
+margin-left: 1%;
 }
 .last_home .package .content .package_item{
   width: 80%;
@@ -1592,9 +1636,21 @@ padding-bottom: 1%;
 }
 
 
-
+.cart_page .product_card{
+ margin-top: 30px;
+}
+.cart_page .orders{
+  position: absolute;
+  margin-left: 68%;
+  top: 0;
+  margin-top: 350px;
+}
+.cart_page .product_card img{
+  height: 180px;
+}
 .cart_page .content{
   margin-left: 10%;
+  margin-top: 40px;
 }
 .cart_page h5{
   margin-top: 2%;
@@ -1606,6 +1662,7 @@ padding-bottom: 1%;
   text-decoration: underline;
   color: #F4AD33;
 }
+
 .product_card .bottom_border{
   border-bottom: 1px solid #000;
   background-color: #FAFAFA;
@@ -1663,6 +1720,14 @@ padding-bottom: 1%;
 }
 .third_card .order_description span{
   margin-left: 4%;
+}
+.orders .fourth_card{
+  background-color: #FAFAFA;
+  width: 120%;
+}
+.orders .fourth_card img{
+  width: 100%;
+  height: 100px;
 }
 .orders .deliver{
   padding-top: 30%;
@@ -2302,7 +2367,7 @@ Home Header */
 .last_home .body{
   background-color: #fff;
  display: block;
-  height: 15%;
+  height: 14%;
   width: 57%;
   margin-left:22%;
   margin-top: 30px;
@@ -2347,7 +2412,7 @@ Home Header */
   height: 560px;
   margin-left: 81%;
   width:16%;
-  margin-top: -600px;
+  margin-top: -560px;
 }
 .last_home .right_side h5{
   text-align: center;
@@ -2438,7 +2503,7 @@ Home Header */
 }
 
 .last_home .services{
-  margin-top: 80px;
+  margin-top: 130px;
  
 }
 .last_home .services .card{
@@ -3453,10 +3518,8 @@ nav .icon {
     margin-right: 15px;
   }
   .last_home .package .content .package_item {
-      margin-left: 170px;
-    
-     
-    }
+      margin-left: 180px;
+  }
   .last_home .package .content .package_item .selected_cards {
    
      
@@ -3488,11 +3551,12 @@ nav .icon {
   .last_home .bars{
     display: block;
   }
+  
 
 .last_home .right_side {
   margin-left: 35%;
   position: absolute;
-  top: 1250px;
+  top: 1350px;
   width: 50%;
   
 }

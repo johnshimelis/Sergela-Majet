@@ -14,6 +14,17 @@ export default function AllProduct() {
   const [category,setCategory]=useState()
   const [suppliers, setSuppliers] = useState() 
   const [categories, setCategories] = useState()
+
+  const product=async (id)=>{
+    await api.get(`suppliers/${id}/products`)
+    .then(res=>{
+      setProducts(res.data.data);
+      setCategory('');
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  }
   useEffect(()=>{
       api.get('/categories')
     .then(res=>{
@@ -29,50 +40,38 @@ export default function AllProduct() {
      });
      api.get(`categories/${loc.state.id}`).then(res=>{
       setCategory(res.data.data);
-     }).catch(err=>{console.log('some error happened')})
-  },[loc.state.id]);
+     })
+     .catch(err=>{console.log('some error happened')});
   api.get('/suppliers')
   .then(res=>{
   setSuppliers(res.data.data);
-  console.log(res.data.data)
   })
   .catch(err=>{
     console.log('Error Occured');
   })
+  },[loc.state.id]);
+ 
 
   return (
     
     <div className='categories'>
-      <h5>ምድቦች</h5>
+    
 {  
             categories?.map(category=>{
               return(
              
              <div className='selected_cards' onClick={()=>{usenav('/all_products',{state:{id:category.id}})}}>
-                <img alt="PepsiCo" src={category.image_path } /> 
-               <div className='names'>
-                    <p>{category.name}</p>
-               </div>
+               
+              <ul>
+                <li><a>{category.name}</a></li>
+               </ul>
            </div>
         
               )
             })
           }
    
-<div className='suppliers'>
-  <div className='all_suppliers'>
-    <h6>አከፍፍዬች</h6>
-    {suppliers?.map(supplier=>{
-      return(
-   <div className='each_suppliers'>
-      <img src={supp} />
-      <h5>{supplier.name}</h5>
-  </div>
-      )
-    })}
-   
 
-  </div>
 
 
        
@@ -87,7 +86,7 @@ export default function AllProduct() {
         
       
    <div className='all_product'  
-       onClick={()=>{navigate('/main_page',{state:{id:product.id}})}}>
+    onClick={()=>{navigate('/main_page',{state:{id:product.id}})}}>
         
      <img src={product?.image_paths[0]} />
      <h6>{product.name}</h6>
@@ -98,7 +97,7 @@ export default function AllProduct() {
       </div>
       </div>
       </div>
-       </div>
+    
    
      
    
