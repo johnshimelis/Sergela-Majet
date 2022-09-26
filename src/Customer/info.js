@@ -1,17 +1,9 @@
-import React from 'react'
-import { useState } from 'react';
-import AppHeader2 from '../components/header 2';
-import { Steps } from 'antd';
-import { Input, Space, Button, Switch } from 'antd';
-import { Card } from 'antd';
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { Row, Col} from 'antd';
-import image from '../images/new_product.png';
-import image2 from '../images/new_product2.png' 
+import React,{useState,useEffect} from 'react'
+import { Input,Button,Card,Layout,Row, Col,Steps,message} from 'antd';
 import { useNavigate } from "react-router-dom";
-import Admin from './admin';
-
-const { Header, Content, Footer } = Layout;
+import api from '../cust_adapter/base'
+import LastHeader from '../components/last_header';
+import { useSelector} from 'react-redux';
 const { Meta } = Card;
 const { Step } = Steps;
 
@@ -30,14 +22,20 @@ const steps = [
     content: 'ክፍያ',
   },
 ];
-
 export default function Info() {
     const [current, setCurrent] = useState(0);
+    const [address,setAddress]=useState();
+    const [user,setUser]=useState();
+    const loggedInuser=useSelector(state=>state.auth.user.data);
     const navigate = useNavigate();
+    useEffect(()=>{
+      setUser(loggedInuser);
+      setAddress(loggedInuser.address);
+    },[]);
 
   const next = () => {
     setCurrent(current + 1);
-    console.log(current + 1);
+    
   };
 
   const prev = () => {
@@ -48,15 +46,17 @@ export default function Info() {
          next();
          navigate('/transport');
      }}     
+     const update=()=>{
+      setUser(prev=>{return {...prev,address:address}});
+      navigate('/transport',{state:{user:user,cost:100}})
 
+     }
 
-  
   return (
     <div className='info'>
+      <LastHeader/>
         <div className='container-fluid'>
-            <div className='header'>
-                <AppHeader2 />
-            </div>
+            
             <div className='content'>
                 <Steps current={current} className="steps">
                 {steps.map((item) => (
@@ -68,77 +68,24 @@ export default function Info() {
                <div className='info_input'>
                    <div className='basic_info'>
                        <h3 style={{marginTop:100, marginLeft:100}}>መሰረታዊ መረጃ</h3>
-                   <Input placeholder="የእርስዎ ስም" style={{width:300, height:40, marginLeft:100, marginTop:20}}/>
-                   <Input placeholder="የአባትዎ ስም" style={{width:300, height:40, marginLeft:20}}/><br />
-                   <Input placeholder="የአያትዎ ስም" style={{width:620, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/>
+                   <Input placeholder="የእርስዎ ስም" value={user?.first_name} onChange={(e)=>{setUser(prev=>{return {...prev,first_name:e.target.value}})}} style={{width:300, height:40, marginLeft:100, marginTop:20}}/>
+                   <Input placeholder="የአባትዎ ስም" value={user?.last_name} onChange={(e)=>{setUser(prev=>{return {...prev,last_name:e.target.value}})}} style={{width:300, height:40, marginLeft:20}}/><br />
+                   <Input placeholder="የመለያ ስም" value={user?.user_name} onChange={(e)=>{setUser(prev=>{return {...prev,user_name:e.target.value}})}} style={{width:620, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/>
+                   <Input placeholder="ኢሜል" value={user?.email} onChange={(e)=>{setUser(prev=>{return {...prev,email:e.target.value}})}} style={{width:620, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/>
+                   
                </div>
                <div className='address'>
                    <h3 style={{marginTop:100, marginLeft:100}}>አድራሻ</h3>
-                   <Input placeholder="ከተማ" style={{width:620, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/><br/>
-                    <Input placeholder="ክፍለ ከተማ" style={{width:190, height:40, marginLeft:100, marginTop:20}}/>
-                   <Input placeholder="ወረዳ" style={{width:195, height:40, marginLeft:20}}/>
-                   <Input placeholder="ሰፈር" style={{width:195, height:40, marginLeft:20}}/><br/>
-                   <Input placeholder="ስልክ ቁጥር" style={{width:405, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/>
-                   <Input placeholder="የቤት ቁጥር" style={{width:195, height:40, marginLeft:20}}/>
+                   <Input placeholder="ከተማ" value={address?.city} onChange={(e)=>{setAddress(prev=>{return {...prev,city:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:620, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/><br/>
+                   <Input placeholder="ክፍለ ከተማ" value={address?.sub_city} onChange={(e)=>{setAddress(prev=>{return {...prev,sub_city:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:190, height:40, marginLeft:100, marginTop:20}}/>
+                   <Input placeholder="ወረዳ" value={address?.woreda} onChange={(e)=>{setAddress(prev=>{return {...prev,woreda:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:195, height:40, marginLeft:20}}/>
+                   <Input placeholder="ጎረቤት" value={address?.neighborhood} onChange={(e)=>{setAddress(prev=>{return {...prev,neighborhood:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:195, height:40, marginLeft:20}}/><br/>
+                <Input placeholder="ስልክ ቁጥር" value={user?.phone_number} onChange={(e)=>{setUser(prev=>{return {...prev,phone_number:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:405, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/>
                </div>
-               <button type='primary' onClick={()=>{navigate('/transport')}}>ይቀጥሉ</button>
+               <button type='primary' onClick={()=>update()}>ይቀጥሉ</button>
                </div>
             </div>
 
-     <div className='orders'>
-          <Card className='fourth_card'
-           hoverable
-           style={{ width: 450, height: 680 }}
-           >
-             <Meta title="ትዕዛዞች"/>
-             <h6 style={{marginLeft:270, marginTop:-20}}> 2 እቃዎች</h6>
-             <Header></Header>
-              <div className='bottom_border'>
-
-             </div>
-             <Card className='third_card'
-           hoverable
-           style={{ width: 150, height: 100, marginTop:50, background:'#FAFAFA'}}
-            cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={image} style={{marginTop:0,marginLeft:10, width:120, height:100}}/>} >
-                <div className='bottom_border'>
-
-             </div>
-             <div className='order_description'>
-               <h4>ቲማቲም</h4>
-               <h6 style={{marginTop:10}}> ኪሎ : 1ኪ . ግ  <span>አይነት : ለቁርጥ</span></h6>
-               <h6 style={{marginTop:20}}>የአንዱ ኪሎ ዋጋ : 40 ብር</h6>
-             </div>
-           </Card>
-              <Card className='third_card'
-           hoverable
-           style={{ width: 150, height: 100, marginTop:80, background:'#FAFAFA'}}
-            cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={image2} style={{marginTop:10,marginLeft:10, width:120, height:80}}/>} >
-                <div className='bottom_border'>
-
-             </div>
-             <div className='order_description'>
-               <h4>ኦማር የምግብ ዘይት</h4>
-               <h6 style={{marginTop:10}}> ኪሎ : 1ኪ . ግ  <span>አይነት : ለቁርጥ</span></h6>
-               <h6 style={{marginTop:20}}>የአንዱ ኪሎ ዋጋ : 40 ብር</h6>
-             </div>
-           </Card>
-           <div className='deliver'>
-             <h6 style={{marginTop:-130}}>ማድረሻ<span>0 ብር</span></h6>
-             <h6>ቅናሽ<span>-120 ብር</span></h6>
-             <h6>ታክስ<span>-124.50 ብር</span></h6>
-           <div className='bottom_border'>
-             
-             </div>
-             </div>
-             <div className='total'>
-               <h6>ጠቅላላ<span>954.50 ብር</span></h6>
-               
-               <div className='bottom_border'>
-             
-             </div>
-             </div>
-             </Card>
-            </div>
               <div className='footer'>
         <div className='container-fluid'>
             <Row gutter={[8, 32]}>

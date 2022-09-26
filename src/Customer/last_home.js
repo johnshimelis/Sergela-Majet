@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import api from '../adapter/base'
+import api from '../cust_adapter/base'
 import LastHeader from '../components/last_header';
 import LastSideNav from '../components/side_nav';
 import { Button, Carousel,Card, Col, Row, Rate,  } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 import HomeFooter from './home_footer';
 import image1 from '../images/sunchips.png';
 import image2 from '../images/user.png';
@@ -38,11 +39,11 @@ import image27 from '../images/package1.png';
 import image28 from '../images/package3.png';
 import image29 from '../images/women.png';
 
-import image30 from '../images/cloth1.png';
-import image31 from '../images/cloth2.png';
-import image32 from '../images/cloth3.png';
-import image33 from '../images/cloth4.png';
-import image34 from '../images/cloth5.png';
+import image30 from '../images/tomato.jpg';
+import image31 from '../images/shampo.jpeg';
+import image32 from '../images/omo.png';
+import image33 from '../images/pastas.jpg';
+import image34 from '../images/tena.jpeg';
 
 function LastHome() {
   const [isSideNav, setSideNav] = useState(false);
@@ -56,32 +57,32 @@ function LastHome() {
   const [categories, setCategories] = useState();
   const [highly_paid, setHighlyPaid] = useState();
   const [packages, setPackage] = useState();
-  useEffect(()=>{
+  useEffect(() => {
     api.get('/categories')
-    .then(res=>{
-      setCategories(res.data.data.slice(0,5));
-    })
-    .catch(err=>{
-      console.log('Error happened')
-    });
-    api .get('/popular-products')
-    .then(res=>{
-      setHighlyPaid(res.data.data.slice(0,5));
-     
-    })
-    .catch(err=>{
-      console.log("Error Occured")
-    });
-    api.get('/packages')
-    .then(res=>{
-      setPackage(res.data.data.slice(0,5));
-    
-    })
-    .catch(err=>{
-      console.log('Error Occured');
-    })
+      .then(res => {
+        setCategories(res.data.data.slice(0, 5));
+      })
+      .catch(err => {
+        console.log('Error happened')
+      });
+    api.get('/popular-products')
+      .then(res => {
+        setHighlyPaid(res.data.data.slice(0, 5));
 
-  },[]);
+      })
+      .catch(err => {
+        console.log("Error Occured")
+      });
+    api.get('/packages')
+      .then(res => {
+        setPackage(res.data.data.slice(0, 5));
+
+      })
+      .catch(err => {
+        console.log('Error Occured');
+      })
+
+  }, []);  
 
 
   
@@ -166,7 +167,7 @@ function LastHome() {
   <img src={image2} />
   <h5>እንኳን በደህና መጡ! </h5>
     
-    <Button className='enter_btn'>ይግቡ</Button>
+    <Button className='enter_btn' onClick={()=>{usenav('/')}}>ይግቡ</Button>
     <Button>ይመዝገቡ</Button>
     <div className='rectangle'>
       <img src={image3} />
@@ -310,7 +311,7 @@ function LastHome() {
             <div className='cloths_img'>
                <img alt="PepsiCo" src={image30} /> 
                <div className='cloths_name'>
-                <p>ተከፋች ሹራብ</p>
+                <p>Tomato</p>
                 <p>430 ብር</p>
                 <Rate className='rate' 
                 allowHalf defaultValue={2.5} />
@@ -320,7 +321,7 @@ function LastHome() {
                <div className='cloths_img'>
                <img alt="PepsiCo" src={image31} /> 
                <div className='cloths_name'>
-                <p>ጋውን</p>
+                <p>Shampo</p>
                 <p>588 ብር</p>
                 <Rate className='rate' 
                 allowHalf defaultValue={2.5} />
@@ -330,7 +331,7 @@ function LastHome() {
                <div className='cloths_img'>
                <img alt="PepsiCo" src={image32} /> 
                <div className='cloths_name'>
-                <p>ሹራብ</p>
+                <p>Omo</p>
                 <p>700 ብር</p>
                 <Rate className='rate' 
                 allowHalf defaultValue={2.5} />
@@ -340,7 +341,7 @@ function LastHome() {
                <div className='cloths_img'>
                <img alt="PepsiCo" src={image33} /> 
                <div className='cloths_name'>
-                <p>ካፖርት</p>
+                <p>Pasta</p>
                 <p>658 ብር</p>
                 <Rate className='rate' 
                 allowHalf defaultValue={2.5} />
@@ -350,7 +351,7 @@ function LastHome() {
                <div className='cloths_img'>
                <img alt="PepsiCo" src={image34} /> 
                <div className='cloths_name'>
-                <p>ጃኬት</p>
+                <p>Tena Oil</p>
                 <p>430 ብር</p>
                 <Rate className='rate'  
                 allowHalf defaultValue={2.5} />

@@ -1,8 +1,10 @@
 import { DownOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Menu, message, Space } from 'antd';
-import React, {useState,useEffect} from 'react';
+import { Button, Dropdown, Menu, Space } from 'antd';
+import React, {useState} from 'react';
 import image from '../images/ser.png';
-import { useNavigate,useLocation,Link } from "react-router-dom";
+import { useSelector,useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { actions} from '../store/products-slice';
 
 
 
@@ -29,9 +31,11 @@ const menu = (
 );
 
 function LastHeader() {
-    const loc=useLocation();
- const [selected_products,setSelected_products]=useState([]);
- const [isActive, setActive] = useState(false);
+  const [isActive, setActive] = useState(false);
+ const istherecart=useSelector(state=>state.product.totalQuantity)===0?false:true
+ const cartquantity=useSelector(state=>state.product.totalQuantity);
+ const navigate=useNavigate();
+ const dispatch=useDispatch();
  
  
 //  useEffect(()=>{
@@ -51,6 +55,13 @@ function LastHeader() {
 
     setActive(!isActive);
   };
+  const logout=()=>{
+  localStorage.setItem('token','');
+  localStorage.setItem('user_name','');
+  dispatch(actions.defaultstate);
+  navigate('/');
+
+}
   
   return (
     <div className='last_header'>
@@ -82,13 +93,24 @@ function LastHeader() {
             </Dropdown>
         <input type="search"  placeholder="ምን ይፈልጋሉ?" />
         <Button><i class="fa-solid fa-magnifying-glass"></i><span> Search </span></Button>
-        <Button className='join_now'>አሁኑኑ ይቀላቀሉ!</Button>
+        
+        {!localStorage.getItem('token')&&<Button className='join_now'>አሁኑኑ ይቀላቀሉ!</Button>}
         
          <span className='fa'><i class="fa-solid fa-heart"></i></span>
-         <span className='fas'><i class="fa-solid fa-cart-arrow-down"></i></span>
-        <div className='badge'>
-          <p>10</p>
-        </div>
+          {istherecart && 
+         <div onClick={()=>navigate('/cart_page')}>
+          <span className='fas'>
+          <i class="fa-solid fa-cart-arrow-down"></i></span>
+          <div className='badge'><p>{cartquantity}</p></div>
+          </div>
+          }
+          {
+          localStorage.getItem('token') && 
+          <div>
+            <div style={{fontSize:'25px',color:'white'}} onClick={logout}><i className='fa fa-sign-out'></i>
+            </div>
+            </div>
+            }
         </div>
         <div className='menu'>
           <ul>
