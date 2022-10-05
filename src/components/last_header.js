@@ -5,9 +5,6 @@ import image from '../images/ser.png';
 import { useSelector,useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { actions} from '../store/products-slice';
-
-
-
 const menu = (
   <Menu
     items={[

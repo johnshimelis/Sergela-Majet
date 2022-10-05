@@ -14,6 +14,6 @@ const auth=createSlice({
          }
     }
 })
-export const actions=auth.actions
+export const auth_actions=auth.actions
 
 export default auth
