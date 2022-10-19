@@ -1,10 +1,8 @@
 import React from "react";
-import { Divider, Layout, Menu, } from 'antd';
 import 'antd/dist/antd.css';
-import { Dropdown, Space, Button } from 'antd';
-import { DownOutlined, SmileOutlined } from '@ant-design/icons';
-import { Input } from 'antd';
-import { AudioOutlined } from '@ant-design/icons';
+import { Dropdown, Space, Button, Menu ,Input} from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { useNavigate } from "react-router-dom";
 import image from '../images/ser.png';
 
 
@@ -15,11 +13,11 @@ const menu = (
   <Menu
     items={[
       {
-        label: <a href="">Amharic</a>,
+        label: <a href="amharic">Amharic</a>,
         key: '0',
       },
       {
-        label: <a href="">Tigrigna</a>,
+        label: <a href="tigrai">Tigrigna</a>,
         key: '1',
       },
       {
@@ -36,43 +34,43 @@ const dropdown = (
   <Menu
     items={[
       {
-        label: <a href="">የታሸጉ ምግቦች</a>,
+        label: <a href="pack_food">የታሸጉ ምግቦች</a>,
         key: '0',
       },
        {
-        label: <a href="">እህል እና ጥራጥሬዎች</a>,
+        label: <a href="cereals">እህል እና ጥራጥሬዎች</a>,
         key: '0',
       },
        {
-        label: <a href="">መጠጦች</a>,
+        label: <a href="drinks">መጠጦች</a>,
         key: '0',
       },
        {
-        label: <a href="">የንጽህና መጠበቂያዎች</a>,
+        label: <a href="sanitary">የንጽህና መጠበቂያዎች</a>,
         key: '0',
       },
        {
-        label: <a href="">የጽህፈት መሳሪያዎች</a>,
+        label: <a href="writing tools">የጽህፈት መሳሪያዎች</a>,
         key: '0',
       },
        {
-        label: <a href="">ልብስ እና ጫማ</a>,
+        label: <a href="clothes and shoes">ልብስ እና ጫማ</a>,
         key: '0',
       },
        {
-        label: <a href="">ኤሌክትሮኒክስ</a>,
+        label: <a href="electronics">ኤሌክትሮኒክስ</a>,
         key: '0',
       },
        {
-        label: <a href="">የውበት መጠበቂያዎች</a>,
+        label: <a href="beauty">የውበት መጠበቂያዎች</a>,
         key: '0',
       },
        {
-        label: <a href="">ቦርሳዎች</a>,
+        label: <a href="bags">ቦርሳዎች</a>,
         key: '0',
       },
        {
-        label: <a href="">ጌጣጌጦች</a>,
+        label: <a href="jawlary">ጌጣጌጦች</a>,
         key: '0',
       },
     ]
@@ -82,29 +80,36 @@ const dropdown = (
 
 
 function HomeHeader(){
-    return(
-       
+    const navigate=useNavigate();
+    return(   
           <div className="home_header">
            <div className="header">
-
-         
-             <Menu  className="menus" style={{backgroundColor:"#000"}}  mode="horizontal" >
-            <Menu.Item  key="home">ጥቅሎች</Menu.Item>
+             <Menu style={{backgroundColor:"#1D1D1D"}} theme="#1D1D1D" mode="horizontal" >
+            <Menu.Item key="home">ጥቅሎች</Menu.Item>
             <Menu.Item key="about">ያዘዙት ዕቃዎች</Menu.Item>
-            <Menu.Item key="about" style={{fontSize:'25px'}}><i class="fa-solid fa-user"></i>
-            </Menu.Item>
-           </Menu>
+            <Menu.Item key="about" style={{fontSize:'25px'}}><i class="fa-solid fa-user"></i></Menu.Item>
+           
+         </Menu>
         
 <div className="dropdown">
      <Dropdown overlay={menu} trigger={['click']} className="dropdown">
-    <a onClick={e => e.preventDefault()}>
+    <a href="none" onClick={e => e.preventDefault()}>
       <Space>
      Engilsh
         <DownOutlined />
       </Space>
     </a>
      </Dropdown>
-    
+          {/* <hr
+        style={{
+            marginTop:0,
+            color: "lightgray",
+            backgroundColor: "lightblue",
+            height: 1, 
+            width: 1420,
+            marginLeft:-50
+        }}
+    /> */}
        
             <div className="logo">
                 <img src={image} className="img"/>
@@ -123,7 +128,7 @@ function HomeHeader(){
                     />
                 
                 <div className="dropdown">
-                  <Dropdown overlay={dropdown} trigger={['click']} >
+                  <Dropdown overlay={dropdown} trigger={['click']} className="dropdown">
                  <a onClick={e => e.preventDefault()}>
                 <Space style={{color:"#BFBFBF", marginLeft:16, marginTop:2}}>
                  የዕቃ ምድቦች
@@ -135,17 +140,15 @@ function HomeHeader(){
    
              </div>
             <div className="icons">
-                 <i class="fa-solid fa-heart" id="heart"></i>
+                 <i class="fa-solid fa-heart"></i>
                  <i class="fa-solid fa-cart-arrow-down"></i>
              </div>
              <div className="btn">
-             <Button className="join_btn">አሁኑኑ ይቀላቀሉ!</Button>
+             <Button className="join_btn" onClick={()=>navigate('/registration')}>አሁኑኑ ይቀላቀሉ!</Button>
              </div>
             
       
       </div>
-     
-
       </div>
       </div>
      

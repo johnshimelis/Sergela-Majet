@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Layout,Card} from 'antd';
 import 'antd/dist/antd.css'; 
 import LastHeader from '../components/last_header';
@@ -15,6 +15,9 @@ export default function CartPage() {
   const totalPrice=useSelector(state=>state.product.totalPrice)
   const totalDiscount=useSelector(state=>state.product.totalDiscount)
   const dispatch=useDispatch()
+  useEffect(()=>{
+    quantity===0 && navigate('/') 
+  },[quantity])
 return (
     <div className='cart_page'>
         <LastHeader text="What are you looking for?" button_text="Join now"/>
@@ -35,14 +38,14 @@ return (
                   <div className='delete_btn'>
                  <DeleteOutlined style={{color : 'red', fontSize : 20}} 
                  onClick={()=>{
-                  dispatch(actions.removeFromCart(choicen))
+                  dispatch(actions.removeFromCart(choicen));
                  }}
                 />
                  </div>
               <Card className='third_card'
                 hoverable
                 style={{ width: 180, height: 180, marginTop:50, background:'#FAFAFA'}}
-                 cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={choicen.image_paths[0]} />}
+                 cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={Array.isArray(choicen.image_paths)?choicen.image_paths[0]:choicen.image_paths} />}
                 >
                 </Card>
                 <div className='description'>
@@ -77,7 +80,7 @@ return (
              <Card className='third_card'
            hoverable
            style={{ width: 150, height: 100, marginTop:50, background:'#FAFAFA'}}
-            cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={choicen?.image_paths[0]} />}>
+            cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={Array.isArray(choicen.image_paths)?choicen.image_paths[0]:choicen.image_paths} />}>
                 <div className='bottom_border'>
 
              </div>
@@ -100,7 +103,7 @@ return (
              </div>
              </div>
              <div className='total'>
-              <button type='warning'  style={{marginTop:'2%'}} onClick={()=>{navigate('/info',{state:{cost:totalPrice}})}}>ግዙ</button>
+               <button type='warning'  style={{marginTop:'2%'}} onClick={()=>{navigate('/info',{state:{cost:totalPrice}})}}>ግዙ</button>
                <div className='bottom_border'>
              
              </div>

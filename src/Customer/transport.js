@@ -1,11 +1,10 @@
-import React,{ useState} from 'react'
+import React,{ useState,useEffect} from 'react'
 import { useNavigate ,useLocation} from 'react-router-dom';
-import { Layout, Row, Col, Input, Button,Checkbox,Card,Steps,Modal } from 'antd';
+import { Layout, Row, Col, Input, Button,Checkbox,Card,Steps,Modal,message } from 'antd';
 import coin from '../images/coin.png'
 import LastHeader from '../components/last_header';
 import api from '../cust_adapter/base';
 import {useSelector} from 'react-redux';
-import axios from 'axios';
 const { Header} = Layout;
 const { Step } = Steps;
 
@@ -36,7 +35,35 @@ export default function Transport() {
     const totalDiscount=useSelector(state=>state.product.totalDiscount)
     const remaining_price=useSelector(state=>state.auth.user.data.loan_balance)
     const [products,setProducts]=useState([]);
+    const [shippingDetail,setShippingDetail]=useState();
     const loc=useLocation();
+    const user=useSelector(state=>state.auth.user.access_token);
+    const [locations,setLocations]=useState({
+      coords:{
+        lat:'',
+        long:''
+      }
+    })
+
+
+    useEffect(()=>{
+      selected_products.forEach(product=>{
+        setProducts(prev=>{return [...prev,{id:product.id,quantity:product.quantities}]})
+      });
+      if("geolocation" in navigator){
+        navigator.geolocation.getCurrentPosition((position)=>{
+          setLocations({
+            coords:{
+              lat:position.coords.latitude,
+              long:position.coords.longitude
+            }
+          })
+        })
+      }
+      else{
+        message.warning("Turn Location ON First")
+      }
+    },[])
     const setVisibleTrue=()=>{
       setVisible(true);
     }
@@ -44,20 +71,25 @@ export default function Transport() {
     const onCancel=()=>{
       setVisible(false);
     }
-    const onOk=()=>{
-      localStorage.setItem('user_name',JSON.stringify([JSON.parse(localStorage.getItem('user_name'))[0],JSON.parse(localStorage.getItem('user_name'))[1]-(loc.state.cost+100),JSON.parse(localStorage.getItem('user_name'))[2]]))
-      window.location.reload(false);
+    const onOk=(id)=>{
+      api.post(`orders/${id}/approve`,'',{
+        headers:
+                { "Authorization": `Bearer ${user}` }
+              })
+      .then(res=>{
+          message.success('Your Order Successfully Sent');
+      })
+      .catch(err=>{
+        message.error("Not Approved Sorry")
+
+      })
       setVisible(false);
     }
     const sendOrder=(transportType)=>{
-      console.log(selected_products);
-      selected_products.forEach(product=>{
-        setProducts(prev=>{return [...prev,{id:product.id,quantity:product.quantities}]})
-      })
-       axios.post('http://18.217.229.72:8400/api/v1/customer/orders',
+        api.post('/orders',
       {
         payment_method:'loan',
-        additional_payment_method:'',
+        additional_payment_method:null,
         shipping_detail:{
           type:transportType,
           first_name:loc.state.user.first_name,
@@ -68,26 +100,30 @@ export default function Transport() {
           woreda:loc.state.user.address.woreda,
           neighborhood:loc.state.user.address.neighborhood,
           house_number:loc.state.user.address.house_number,
-          latitude:0,
-          longitude:0
+          latitude:locations.coords.lat,
+          longitude:locations.coords.long
         },
         products,
         packages:{}
         
-      },
-      {
-        headers:{ "Authorization": `Bearer ${localStorage.getItem("token")} `}
-  
-}
+      },{
+        headers:
+                { "Authorization": `Bearer ${user}` }
+              }
       )
       .then(dt=>{
-         console.log(dt);
+        setShippingDetail(dt.data.data);
+        setVisible(true);
+         ;
       })
       .catch(err=>{
-        console.log('error happened somewhere');
-         console.log(err);
+        console.log(err);
+        if(err.response.data.message.includes('.type')){
+          message.warning('Choose Transport !')
+        }
       })
-    }
+      }
+    
     const next = () => {
     setCurrent(current + 1);
     console.log(current + 1);
@@ -148,11 +184,13 @@ export default function Transport() {
                </Card>
                </Col>
                <Col span={8}>
-          <Card className='third_card'
+               <Card className='third_card'
            hoverable
-           cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={coin} />} >
-             <h5 >ያለዎት ሂሳብ</h5>
-                <h4>{JSON.parse(localStorage.getItem('user_name'))[1]} ብር</h4>
+           style={{ width: 400, height: 120, marginTop:10,marginLeft:200, background:'#fff'}}
+              
+            cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={coin} style={{marginTop:10,marginLeft:270, width:120, height:100}}/>} >
+             <h5 style={{marginTop:-110, marginLeft:-10,fontWeight:'200'}}>ያለዎት ሂሳብ</h5>
+                <h4 style={{marginTop:20, marginLeft:-10, fontWeight:'300'}}>{remaining_price} ብር</h4>
            </Card>
                </Col>
                </Row>
@@ -173,46 +211,58 @@ export default function Transport() {
 
                </Card>
   
-              <Button style={{color:'#000', background:'#F4AD33',height:50}} type='warning' onClick={()=>sendOrder(transport)}>የሰረገላ የብድር ክፍያ</Button>
-              <Button style={{marginLeft:22, background:'#000', height:50}} type='primary' onClick={()=>{navigate('/payment',{state:{type:transport}})}}>ወደ ክፍያ ይሂዱ</Button>
+              <Button style={{color:'#000', background:'#F4AD33',height:50}} type='warning' onClick={()=>{sendOrder(transport)}}>የሰረገላ የብድር ክፍያ</Button>
+              <Button style={{marginLeft:22, background:'#000', height:50}} type='primary' onClick={()=>{navigate('/payment',{state:{user:loc.state.user,type:transport}})}}>ወደ ክፍያ ይሂዱ</Button>
               
-    <div className='orders'>
-       <h5>ትዕዛዞች</h5>
-             <h6> {quantity} እቃዎች</h6>
-      <div className='bottom_border'>
-      </div>
-      {selected_products?.map(choicen=>{
+              <div className='orders'>
+          <Card className='fourth_card'
+           hoverable
+           
+           >
+             <Meta title="ትዕዛዞች"/>
+             <h6 style={{marginLeft:270, marginTop:-20}}> {quantity} እቃዎች</h6>
+              <div className='bottom_border'>
+             </div>
+             {selected_products?.map(choicen=>{
                   <div className='bottom_border'>
-                    </div>
-                     
-        return(
-          
-          <div className='order_description'>
-              <img alt="አስቤዛ መካከለኛ ቤተሰብ" src={choicen?.image_paths[0]} />
+
+             </div>
+              return(
+             <Card className='third_card'
+           hoverable
+           style={{ width: 150, height: 100, marginTop:50, background:'#FAFAFA'}}
+            cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={Array.isArray(choicen.image_paths)?choicen.image_paths[0]:choicen.image_paths} />}>
+                <div className='bottom_border'>
+             </div>
+             <div className='order_description'>
                <h4>{choicen?.name}</h4>
-               <h6>የአንዱ ዋጋ : {choicen?.price} ብር</h6>
+               <h6 style={{marginTop:20}}>የአንዱ ዋጋ : {choicen?.price} ብር</h6>
                <h6>ጠቅላላ ዋጋ፡ {choicen?.totalPrice} ብር</h6>
-            
-          </div>
-          
-            
-    
-  )
-}
-      )
-}
-   <div className='deliver'>
+             </div>
+           </Card>
+             )
+            }
+             )
+          }
+               <div className='deliver'>
              <h6>ቅናሽ<span style={{color:'red'}}><strike>{totalDiscount} ብር</strike></span></h6>
              <h6>ጠቅላላ ዋጋ፡ <span>{totalPrice} ብር</span></h6>
-             <h6>ታክስ<span> will be calculated</span></h6>
            <div className='bottom_border'>
              
              </div>
              </div>
-</div>
-     <div className='footer'>
+             <div className='total'>
+                 <div className='bottom_border'>
+             </div>
+             </div>
+             </Card>
+            </div>
+
+  
+            </div>
+        <div className='footer'>
         <div className='container-fluid'>
-           <Row gutter={[8, 32]}>
+            <Row gutter={[8, 32]}>
                <Col span={6}>
                   <div className='part_1'  style={{marginTop:-50, color:'#000'}}>
                        <h1 style={{color:'#fff'}}>ለጋዜጣችን ይመዝገቡ</h1> 
@@ -268,18 +318,19 @@ export default function Transport() {
     </div>
               
         </div> 
-        <Modal visible={visible} closable={false} onOk={onOk} onCancel={onCancel} title="Payment Verification" okText='ይግዙ' cancelText='አይ ይቅር'>
-              {JSON.parse(localStorage.getItem('user_name'))[1]-(loc.state.cost+100)>0?
-              <div>
-                <p>ተጨማሪ የትራንስፖርት ዋጋ</p>
-                <p>+100 ብር</p>
-              <p>የሚኖርዎት ቀሪ ሂሳብ {JSON.parse(localStorage.getItem('user_name'))[1]-(loc.state.cost+100)}</p>
-              </div>:
-              <p>ያለዎት ቀሪ ሂሳብ አነስተኛ ነው</p>
-            }
-            
+        <Modal className='payment_approval' cancelButtonProps={{style:{backgroundColor:'#f44336'}}}okButtonProps={{style:{backgroundColor:'green'}}}visible={visible} closable={false} onOk={()=>onOk(shippingDetail.id)} onCancel={onCancel} okText='Approve' cancelText='Decline'>
+        <div class="container">
+            <h3>Payment Approval</h3>
+                 <div>
+                  <hr/>
+                  <h5>ትራንስፖርት ዋጋ: <span><em>{shippingDetail?.estimated_delivery_cost} ብር</em></span></h5>
+                  <h5>ለመድረስ፡ <span><em>{shippingDetail?.estimated_delivery_time} ደቂቃ</em></span></h5>
+                  <hr/>
+                  <h4 style={{float:'right'}}>ጠቅላላ ዋጋው፡ <span><em>{shippingDetail?.total_cost} ብር</em></span></h4>
+                  <hr/>
+                  </div>
+        </div>  
         </Modal>
-    </div>
     </div>
   )
 }

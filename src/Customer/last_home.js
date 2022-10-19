@@ -1,11 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import api from '../cust_adapter/base'
 import LastHeader from '../components/last_header';
-import LastSideNav from '../components/side_nav';
-import { Button, Carousel,Card, Col, Row, Rate,  } from 'antd';
+import { Button, Carousel, Row, Rate  } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {useSelector} from 'react-redux'
 import HomeFooter from './home_footer';
+import imager1 from '../images/imager1.jfif'
+import imager2 from '../images/imager2.jfif'
+import imager3 from '../images/imager3.jpg'
+import imager4 from '../images/imager4.jpg'
+import imager5 from '../images/imager5.jpg'
+import package1 from '../images/packages.png'
 import image1 from '../images/sunchips.png';
 import image2 from '../images/user.png';
 import image3 from '../images/rectangle.png';
@@ -14,40 +19,16 @@ import image5 from '../images/cashback.png';
 import image6 from '../images/hour.png';
 import image7 from '../images/premium.png';
 import image8 from '../images/images.png';
-import image9 from '../images/items1.png';
-import image10 from '../images/items2.png';
-import image11 from '../images/items3.png';
-import image12 from '../images/items4.png';
-import image13 from '../images/items5.png';
-import image14 from '../images/items6.png';
 import image15 from '../images/banner.png';
-
-import image16 from '../images/product_71.png';
-import image17 from '../images/product_61.png';
-import image18 from '../images/product_21.png';
-import image19 from '../images/product_101.png';
-import image20 from '../images/product_21.png';
-
 import image21 from '../images/discount2.png';
 import image22 from '../images/discount1.png';
 import image23 from '../images/discount3.png';
-
 import image24 from '../images/women.png';
-import image25 from '../images/product2.png';
-import image26 from '../images/product1.png';
-import image27 from '../images/package1.png';
-import image28 from '../images/package3.png';
-import image29 from '../images/women.png';
-
-import image30 from '../images/tomato.jpg';
-import image31 from '../images/shampo.jpeg';
-import image32 from '../images/omo.png';
-import image33 from '../images/pastas.jpg';
-import image34 from '../images/tena.jpeg';
-
+import SideNav from './side_nav';
 function LastHome() {
   const [isSideNav, setSideNav] = useState(false);
   const usenav=useNavigate();
+  const isLoggedIn=useSelector(state=>state.auth.user)
   const toggleClass = () => {
     setSideNav(!isSideNav);
    };
@@ -57,58 +38,42 @@ function LastHome() {
   const [categories, setCategories] = useState();
   const [highly_paid, setHighlyPaid] = useState();
   const [packages, setPackage] = useState();
-  useEffect(() => {
+  useEffect(()=>{
     api.get('/categories')
-      .then(res => {
-        setCategories(res.data.data.slice(0, 5));
-      })
-      .catch(err => {
-        console.log('Error happened')
-      });
+    .then(res=>{
+      setCategories(res.data.data);
+    })
+    .catch(err=>{
+      console.log('Error happened')
+    });
     api.get('/popular-products')
-      .then(res => {
-        setHighlyPaid(res.data.data.slice(0, 5));
-
-      })
-      .catch(err => {
-        console.log("Error Occured")
-      });
+    .then(res=>{
+      setHighlyPaid(res.data.data.slice(0,5));
+     
+    })
+    .catch(err=>{
+      console.log("Error Occured")
+    });
     api.get('/packages')
-      .then(res => {
-        setPackage(res.data.data.slice(0, 5));
+    .then(res=>{
+      setPackage(res.data.data.slice(0,5));
+    
+    })
+    .catch(err=>{
+      console.log('Error Occured');
+    })
 
-      })
-      .catch(err => {
-        console.log('Error Occured');
-      })
-
-  }, []);  
-
-
-  
+  },[]);  
   return (
-    <div className='last_home'>
-        
-          <LastHeader />
-         
+    <div className='last_home'> 
+    <LastHeader/>
+     
     <div className={isSideNav ? 'last_side_nav': 'new_nav'} id="last_side_nav">
+
     <div className='close'>
       <span><i onClick={toggleClass} class="fa-solid fa-xmark"></i></span>
     </div>
-      <ul>
-        <li className='sub'><i class="fa-solid fa-bars"></i><a href="#">ምድቦች</a></li>
-        <li><i class="fa-solid fa-burger"></i><a href="#" >የታሸጉ ምግቦች</a></li>
-        <li><i class="fa-solid fa-wheat-awn-circle-exclamation"></i><a href="#">እህልና ጥራጥሬ</a></li>
-        <li><i class="fa-solid fa-wine-glass"></i><a href="#">መጠጦች</a></li>
-        <li><i class="fa-solid fa-pump-medical"></i><a href="#">የንጽህና መጠበቂያ</a></li>
-        <li><i class="fa-solid fa-pen"></i><a href="#">የጽሕፈት መሳሪያዎች</a></li>
-        <li><i class="fa-solid fa-shirt"></i><a href="#">ልብስ አና ጫማ</a></li>
-        <li><i class="fa-solid fa-power-off"></i><a href="#">ኤሌክትሮኒክስ</a></li>
-        <li><i class="fa-solid fa-soap"></i><a href="#">የውበት መጠበቂያዎች</a></li>
-        <li><i class="fa-solid fa-briefcase"></i><a href="#">ቦርሳዎች</a></li>
-        <li><i class="fa-solid fa-gem"></i><a href="#">ጌጣጌጦች</a></li>
-
-      </ul>
+      <SideNav/>
     </div>
 
      <div className='only_icon' id="last_side_nav">
@@ -135,9 +100,8 @@ function LastHome() {
        
         </div>
             
-        <div className='body'>
-         
-          <div className='content'>
+    <div className='body'>
+         <div className='content'>
       <Carousel autoplay >
       <div>
          <h3>3 Sunchips <span>ሲገዙ አንድ በነጻ</span></h3>
@@ -163,12 +127,18 @@ function LastHome() {
   
   </div>
 </div>
+
 <div className='right_side'>
+  {!isLoggedIn?
+  <div className='intro'>
   <img src={image2} />
   <h5>እንኳን በደህና መጡ! </h5>
     
-    <Button className='enter_btn' onClick={()=>{usenav('/')}}>ይግቡ</Button>
-    <Button>ይመዝገቡ</Button>
+    <Button className='enter_btn' onClick={()=>{usenav('/login')}}>ይግቡ</Button>
+    <Button onClick={()=>{usenav('/registration')}}>ይመዝገቡ</Button>
+    
+    </div>
+    :''}
     <div className='rectangle'>
       <img src={image3} />
       <h6>በቂ ገንዘብ የለዎትም፤ አይጫነቁ የብድር አገልግሎታችንን ይመዝገቡ!</h6>
@@ -176,6 +146,7 @@ function LastHome() {
     </div>
      
 </div>
+
 <div className='services'>
   
   <div className='card'>
@@ -185,35 +156,37 @@ function LastHome() {
         <p>ካሉበት ቦታ በነጻ ትራንስፖርት እናደርሳለን</p>
     </div>
      <div className='cards'>
-       <img alt="PepsiCo" src={image4}/>
-       <h6>ነጻ ትራንስፖርት</h6>
-        <p>ካሉበት ቦታ በነጻ ትራንስፖርት እናደርሳለን</p>
+       <img alt="PepsiCo" src={image5}/>
+       <h6>የብድር አገልግሎት</h6>
+        <p>በብድር መገበይት ይችላሉ</p>
     </div>
      <div className='cards'>
-       <img alt="PepsiCo" src={image4}/>
-       <h6>ነጻ ትራንስፖርት</h6>
-        <p>ካሉበት ቦታ በነጻ ትራንስፖርት እናደርሳለን</p>
+       <img alt="PepsiCo" src={image6}/>
+       <h6>የደንብኛ አገልግሎት</h6>
+        <p>24/7 አስተማማኝ ብቁ እገዛ ያገኛሉ</p>
     </div>
      <div className='cards'>
-       <img alt="PepsiCo" src={image4}/>
-       <h6>ነጻ ትራንስፖርት</h6>
-        <p>ካሉበት ቦታ በነጻ ትራንስፖርት እናደርሳለን</p>
+       <img alt="PepsiCo" src={image7}/>
+       <h6>ጥራቱን የጠበቀ እቃ</h6>
+        <p>ደረጃቸወን የጠበቁ እቃዎች</p>
     </div>
      <div className='cards'>
-       <img alt="PepsiCo" src={image4}/>
-       <h6>ነጻ ትራንስፖርት</h6>
-        <p>ካሉበት ቦታ በነጻ ትራንስፖርት እናደርሳለን</p>
+       <img alt="PepsiCo" src={image8}/>
+       <h6>ተመጣጣኝ ዋጋ</h6>
+        <p>ጥራቱን የጠበቀ እቃ በቅናስ ዋጋ</p>
     </div>
   </div>
 </div>
 <div className='some_btn'>
   <Button>ከተመረጡ ምድቦቻችን ይገብዩ!</Button>
   </div>
+  <Carousel autoplay>
 
    <div className='selected_items'>
         {
             categories?.map(category=>{
               return(
+            
              <div className='selected_cards' onClick={()=>{usenav('/all_products',{state:{id:category.id}})}}>
               <img alt="PepsiCo" src={category.image_path } /> 
            <div className='names'>
@@ -222,11 +195,11 @@ function LastHome() {
         </div>
               )
             })
+            
           }
-        
-        
-       
          </div>
+         </Carousel>
+
           <div className='banner'>
           <img src={image15} />
           <p>የቤት አስቤዛዎን ከአንድ ቦታ ሳይንገላቱ ይሸምቱ!</p>
@@ -237,7 +210,7 @@ function LastHome() {
             {
          highly_paid?.map(popular_products=>{
           return(
-              <div className='high_rating_img'>
+              <div className='high_rating_img' onClick={()=>{usenav('/main_page',{state:{product:popular_products}})}}>
                <img alt="PepsiCo" src={popular_products.image_paths} /> 
                <div className='high_rating_name'>
                 <p>{popular_products.name}</p>
@@ -258,16 +231,16 @@ function LastHome() {
           <h3>የእቃ ጥቅሎች</h3>
           <p>እንዚህን ጥቅሎች በቅናሽ ዋጋ ይሸምቱ!</p>
           <div className='btn'>
-          <Button >
-            <i  class="fa-solid fa-angle-left"></i>
-            </Button>
+            <Button >
+              <i  class="fa-solid fa-angle-left"></i>
+              </Button>
           </div>
-          <div className='package_item'>
-         
+                <div className='package_item'>
+                
             {packages?.map(pack=>{
               return(
-           <div className='selected_cards'>
-              <img alt="PepsiCo" src={image10} />
+           <div className='selected_cards' onClick={()=>usenav('/main_page',{state:{product:pack}})}>
+              <img alt="PepsiCo" src={pack?.image_path} />
                 <div className='names'>
                   <h6>{pack.name}</h6>
                   <p>{pack.price} ብር</p>
@@ -286,79 +259,6 @@ function LastHome() {
                </Button>
         </div>
           </div>
-        </div>
-         <div className='discounts'>
-          <h2>የዛሬ ልዩ ቅናሾች</h2>
-          <Row gutter={[0,10]}>
-          <div className='discount_img'>
-            <img src={image21} />
-          </div>
-           <div className='discount_img'>
-            <img src={image22} />
-          </div>
-           <div className='discount_img'>
-            <img src={image23} />
-          </div>
-        </Row>
-      </div>
-      <div className='for_womens'>
-        <img src={image24} />
-        <h2>የክረምት ልብሶች ለሴቶች በቅናሽ</h2>
-      </div>
-
-      <div className='cloths'>
-          <Row gutter={[0,10]}>
-            <div className='cloths_img'>
-               <img alt="PepsiCo" src={image30} /> 
-               <div className='cloths_name'>
-                <p>Tomato</p>
-                <p>430 ብር</p>
-                <Rate className='rate' 
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-
-               <div className='cloths_img'>
-               <img alt="PepsiCo" src={image31} /> 
-               <div className='cloths_name'>
-                <p>Shampo</p>
-                <p>588 ብር</p>
-                <Rate className='rate' 
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-
-               <div className='cloths_img'>
-               <img alt="PepsiCo" src={image32} /> 
-               <div className='cloths_name'>
-                <p>Omo</p>
-                <p>700 ብር</p>
-                <Rate className='rate' 
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-
-               <div className='cloths_img'>
-               <img alt="PepsiCo" src={image33} /> 
-               <div className='cloths_name'>
-                <p>Pasta</p>
-                <p>658 ብር</p>
-                <Rate className='rate' 
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-
-               <div className='cloths_img'>
-               <img alt="PepsiCo" src={image34} /> 
-               <div className='cloths_name'>
-                <p>Tena Oil</p>
-                <p>430 ብር</p>
-                <Rate className='rate'  
-                allowHalf defaultValue={2.5} />
-               </div>
-           </div>
-          
-        </Row>
         </div>
         <HomeFooter />
 

@@ -1,14 +1,12 @@
 import React,{useState,useEffect} from 'react'
-import { Layout,Breadcrumb,Button,Card, Col, Row } from 'antd';
+import { Layout,Breadcrumb,Button,Card, Col, Row, message } from 'antd';
 import 'antd/dist/antd.css';
 import LastHeader from '../components/last_header';
-
 import { useNavigate,useLocation } from "react-router-dom";
-import api from '../cust_adapter/base'
 import { useDispatch } from 'react-redux';
 import {actions} from '../store/products-slice'
-const { Header, Content, Footer } = Layout;
-const { Meta } = Card;
+import { fav_action } from '../store/fav-slice';
+const { Content} = Layout;
 
 export default function MainPage() {
   const navigate  = useNavigate();
@@ -19,6 +17,10 @@ export default function MainPage() {
   const addToCart=(product)=>{
     product['quantities']=counter;
     dispatch(actions.addToCart(product))
+  }
+  const addToFav=(product)=>{
+    dispatch(fav_action.addFav(product));
+    message.success("Added To Favorite");
   }
   function increase(){
     setCounter(counter=>counter+1);
@@ -31,7 +33,11 @@ export default function MainPage() {
   }  
   
   useEffect(()=>{
-    setProduct(loc.state.product)
+    if(!loc?.state?.product){
+      return navigate('/')
+    }
+    else{
+    setProduct(loc.state.product)}
   },[]);
 
   return (
@@ -44,26 +50,41 @@ export default function MainPage() {
       </Breadcrumb>
       </Content> 
       <div className='page_card'>
-     
-        <div className='first_card'>
+        {
+        product?.image_paths?product?.image_paths?.map(path=>{
           
-          <img src={product?.image_paths[0]}/>
+          return(
+              <div className='first_card'>
+                  <img src={path} alt="product"/>
+              </div>
+           )}
+          )
+        :<div className='first_card'><img src={product?.image_path} alt="product"/></div>}
+           
+        <div className='fourth_card'>
+            <img src={product?.image_paths?product?.image_paths[0]:product?.image_path?product?.image_path:''} alt='product'/>
+         </div>
+         
+        
+        {/* <div className='first_card'>
+          
+          <img src={product?.image_paths?product?.image_paths[0]:product?.image_path?product?.image_path:''}/>
          </div>
           <div className='first_card'>
-          <img src={product?.image_paths[1]}/>
+          <img src={product?.image_paths?product?.image_paths[1]:''}/>
          </div>
           <div className='first_card'>
-          <img src={product?.image_paths[2]}/>
+          <img src={product?.image_paths?product?.image_paths[2]:''}/>
          </div>
           <div className='fourth_card'>
-          <img src={product?.image_paths[0]}/>
-         </div>
+          <img src={product?.image_paths?product?.image_paths[0]:product?.image_path?product?.image_path:''}/>
+         </div> */}
        
       </div>
       <div className='asbeza'>
           <h1>{product?.name}</h1>
 
-           <h2>{product?.price}</h2>
+           <h2>{parseFloat(product?.price)-parseFloat(product?.discount)}</h2>
            <div className='birr'>
           <h5>ብር</h5>
           </div>
@@ -117,9 +138,9 @@ export default function MainPage() {
             <p>{counter}</p>
         </div>
         <div className='last_button'>
-      
+        {/* ;navigate('/cart_page',{state:{counter:counter,product:product}}) */}
           <Button className='primary' onClick={()=>{addToCart(product);navigate('/cart_page')}}  style={{background: '#F4AD33'}}><span><i class="fa-solid fa-magnifying-glass"></i></span>ዘንቢል ዉስጥ ያስገቡ </Button>
-          <Button className='secondary'>ለወደፊት ያስቀምጡ</Button>
+          <Button className='secondary' onClick={()=>{addToFav(product)}}>ለወደፊት ያስቀምጡ</Button>
         </div>
     </div>
   )

@@ -2,7 +2,8 @@ import React,{useEffect,useState} from 'react'
 import { useNavigate,useLocation } from 'react-router-dom';
 import api from '../cust_adapter/base'
 import LastHeader from '../components/last_header';
-import { Menu,Row,Card,Image,Col } from 'antd';
+import { Menu,Row,Card,Image,Col,message} from 'antd';
+import { useSelector } from 'react-redux';
 export default function AllProduct() {
   const loc=useLocation();
   const navigate=useNavigate();
@@ -13,6 +14,7 @@ export default function AllProduct() {
   const [selectedProduct,setselectedProduct]=useState();
   const [productName,setProductName]=useState();
   const [visible, setVisible] = useState(false);
+  const loggedInuser=useSelector(state=>state.auth.user);
   const {Meta}=Card;
   const handleback=(url)=>{
         navigate(`/${url}`)
@@ -45,23 +47,26 @@ export default function AllProduct() {
             {
                label:<i className="fa fa-arrow-left"></i>,
                key:'home',
-               onClick:()=>handleback('last_home')
+               onClick:()=>handleback('')
             }
         ]
         );
   useEffect(()=>{
+    if(!loc?.state?.id){
+      message.warning("choose from categories list");
+      return navigate('/')
+    }
       api.get('/categories')
     .then(res=>{
       setCategories(res.data.data.slice(0,5));
       res.data.data.forEach(element => {
-       
         setNavLinks(prev=>{return [...prev,{label:element.name,key:element.id,onClick:()=>handlemenu(element.id)}]})
     })
     })
     .catch(err=>{
       console.log('Error happened')
     });
-    api.get(`categories/${loc?.state?.id?loc.state.id:36}/products`).then(res=>{
+    api.get(`categories/${loc?.state?.id}/products`).then(res=>{
       setProducts(res.data.data);
     })
     .catch(err=>{
@@ -106,13 +111,13 @@ export default function AllProduct() {
                       }
                     </Image.PreviewGroup>
                   </div>
-                  <Meta title={product.name} description={product.description}/>
+                  <Meta title={product.name} description={product.description.length>=50?product.description.slice(0,50)+" . . .":product.description}/>
                   <Meta description={[
                   <div style={{color:'green'}}>
                       <strike style={{color:'red'}}>
-                        {parseInt(product.discount)+parseInt(product.price)} ብር</strike>
+                        {product.price} ብር</strike>
                         <br/>
-                      {product.price + ' ብር'}
+                      {parseFloat(product.price)-parseFloat(product.discount) + ' ብር'}
                       <br/>
                       {
                       product.image_paths.length===1?product.image_paths.length+' image':product.image_paths.length+' images' 

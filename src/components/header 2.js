@@ -42,7 +42,7 @@ function AppHeader2(props){
              <Menu theme="dark" mode="horizontal" >
             <Menu.Item key="home">ጥቅሎች</Menu.Item>
             <Menu.Item key="about">ያዘዙት ዕቃዎች</Menu.Item>
-            <Menu.Item key="features"><span className="span">ሰላም!</span> አበበ ቢቂላ</Menu.Item> 
+            <Menu.Item key="features"><span className="span">ሰላም!</span> {JSON.parse(localStorage.getItem('user_name'))[0]}</Menu.Item> 
              <Menu.Item key="about" style={{fontSize:'25px'}}><i class="fa-solid fa-user"></i></Menu.Item>
            
          </Menu>

@@ -1,11 +1,11 @@
 import React from "react";
 import AppHeader from "./header";
 //import  GetProducts from "./product";
-import AllProduct from "../Customer/allProducts";
-import AppFooter from "../components/footer"
-import SideNav from "../components/sideNav";
-import GetProducts2 from "../Customer/product 2";
-import AppHeader2 from "../components/header 2";
+import AllProduct from "./allProducts";
+import AppFooter from "./footer"
+import SideNav from "./sideNav";
+import GetProducts2 from "./product 2";
+import AppHeader2 from "./header 2";
 import image from '../images/ser.png';
 import person from '../images/person.png';
 

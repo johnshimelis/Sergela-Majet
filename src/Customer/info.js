@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Input,Button,Card,Layout,Row, Col,Steps,message} from 'antd';
 import { useNavigate } from "react-router-dom";
-import api from '../cust_adapter/base'
+import api from '../adapter/base'
 import LastHeader from '../components/last_header';
 import { useSelector} from 'react-redux';
 const { Meta } = Card;
@@ -26,11 +26,17 @@ export default function Info() {
     const [current, setCurrent] = useState(0);
     const [address,setAddress]=useState();
     const [user,setUser]=useState();
-    const loggedInuser=useSelector(state=>state.auth.user.data);
+    const loggedInuser=useSelector(state=>state.auth?.user?.data);
     const navigate = useNavigate();
     useEffect(()=>{
+      if(!loggedInuser){
+        message.success('Please Logged In First!')
+        navigate('/login');
+      }
+      else{
       setUser(loggedInuser);
       setAddress(loggedInuser.address);
+    }
     },[]);
 
   const next = () => {
@@ -80,7 +86,8 @@ export default function Info() {
                    <Input placeholder="ክፍለ ከተማ" value={address?.sub_city} onChange={(e)=>{setAddress(prev=>{return {...prev,sub_city:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:190, height:40, marginLeft:100, marginTop:20}}/>
                    <Input placeholder="ወረዳ" value={address?.woreda} onChange={(e)=>{setAddress(prev=>{return {...prev,woreda:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:195, height:40, marginLeft:20}}/>
                    <Input placeholder="ጎረቤት" value={address?.neighborhood} onChange={(e)=>{setAddress(prev=>{return {...prev,neighborhood:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:195, height:40, marginLeft:20}}/><br/>
-                <Input placeholder="ስልክ ቁጥር" value={user?.phone_number} onChange={(e)=>{setUser(prev=>{return {...prev,phone_number:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:405, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/>
+                   <Input placeholder="ስልክ ቁጥር" value={user?.phone_number} onChange={(e)=>{setUser(prev=>{return {...prev,phone_number:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:405, height:40, marginLeft:100, marginTop:20,paddingBottom:-50}}/>
+                   <Input placeholder="የቤት ቁጥር" value={address?.house_number} onChange={(e)=>{setAddress(prev=>{return {...prev,house_number:e.target.value}});setUser(prev=>{return{...prev,address:address}})}} style={{width:195, height:40, marginLeft:20}}/>
                </div>
                <button type='primary' onClick={()=>update()}>ይቀጥሉ</button>
                </div>

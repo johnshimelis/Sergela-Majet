@@ -1,14 +1,10 @@
 import React from 'react'
 import { Header } from 'antd/lib/layout/layout'
-import { Input } from 'antd';
-import { Card, Col, Row } from 'antd';
-import { Cascader, Select, Space, Button } from 'antd';
+import { Input,Card, Col, Row,Cascader, Select, Space, Button } from 'antd';
 import { Switch } from 'antd';
-
 const { Option } = Select;
 const { Meta } = Card;
 const name = "ብር"
-
 const { TextArea } = Input;
 export default function NewItems2() {
   return (
@@ -33,11 +29,11 @@ export default function NewItems2() {
            hoverable
            style={{ width: 580, height: 450, border:'1px dashed #000', marginLeft:50 }}
            >
+            
               <Card className='upload_card'
            hoverable
            style={{ width: 140, height: 130, background:'#FAFAFA' }}>
              <span><i class="fa-solid fa-plus" style={{color:'#8C8C8C', fontSize : 30, cursor:'pointer', marginLeft:25, marginTop:20, cursor:'pointer'}}></i></span>
-             
              <h3 style={{fontSize:10, marginTop:10}}>እዚህ ጋር ፎቶ ያስገቡ</h3>
            </Card>
            </Card>

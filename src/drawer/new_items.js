@@ -1,249 +1,318 @@
-
-import React, { Component,useRef, useState } from 'react';
-import { Header } from 'antd/lib/layout/layout'
-import { Input } from 'antd';
-import axios from 'axios';
-import { Card, Col, Row } from 'antd';
-import image_14 from '../images/product_14.png';
-import image_18 from '../images/product_18.png';
-import image_15 from '../images/product_15.png';
-import image_17 from '../images/product_17.png';
-import image_19 from '../images/product_19.png';
-
-import { Switch } from 'antd';
-import NewItemCard from '../Admin/new_item_card';
-import { Cascader, Select, Space, Button } from 'antd';
-import {EditOutlined, DeleteOutlined, ConsoleSqlOutlined} from '@ant-design/icons';
-
+import React,{useState} from 'react'
+import api from '../adapter/base'
+import { Input, message,Col, Form,Row,Upload,Select,Switch,Tag} from 'antd';
+import ImgCrop from 'antd-img-crop';
+import {useQuery} from 'react-query';
 const { Option } = Select;
-const { Meta } = Card;
-const name = "ብር"
+const {CheckableTag}=Tag;
 
-const { TextArea } = Input;
+const NewItems=()=>{
+  const [fileList,setFileList]=useState([])
+  const [product,setProduct]=useState()
+  const[tagsData,setTagsData]=useState(["ትልቅ", "መካከለኛ","ትንሽ"])
+  const[selectedTags,setSelectedTags]=useState(["ትልቅ"]);
 
-export default function NewItems(){
-
-
-    let newClass = 'new_class';
-    let otherClass = 'row';
-    const [state, setState] = useState({
-      cardsCount: 0
-    });
-      const addRobotHandler = () => {
-       onButtonClick() 
-       
-};
-  
-    const [image, setImage] = useState('');
-
-     const  fileSelectedHandler = (event) => {
-      setState(prevState => {
-           return { cardsCount: prevState.cardsCount + 1 };
-    });
-      setImage(URL.createObjectURL(event.target.files[0]));
-        
-        }
-
-
-  const getCards = ()  => {
-    
-    let cards = [];
-    for(let i = 0; i < state.cardsCount; i++) {
-      if( i < 2){
-         cards.push(<NewItemCard src={image}/>)
-
-      }
-    
-     
-      // else if(state.cardsCount >2){
-      //   otherClass = "other_class"
-      //    cards.push(<NewItemCard2/>)
-      //   newClass = 'newClass';
-      // }
-    }
-     return cards;
-  }
-    const printCards = () =>{
-      let new_cards = [];
-      for(let j = 2; j < state.cardsCount; j++){
-        if(j >=2 && j <5){
-        new_cards.push(<NewItemCard src={image} />);
-       
-        }
-      }
-       return new_cards;
-    }
-     const printCard = () =>{
-      let new_card = [];
-      for(let k = 5; k < state.cardsCount; k++){
-        if(state.cardsCount >2){
-        new_card.push(<NewItemCard src={image} />);
-       
-        }
-      }
-       return new_card;
-    }
-
-   
-  
-
-
-
-//       const handleApi = () =>{
-//           const url = 'http://18.217.229.72:8400/api/v1/products';
-//           const formData = new FormData();
-//             formData.append('image', image,);
-//           axios.post(url, {
-//          headers : 
-//        {
-//           "Authorization" : `Bearer ${localStorage.getItem("token")}`
-//         }
-//           },
-//              formData).then((res) => {
-//             console.log(res);
-//           })
-//         }
-
-
-
- const inputFile = useRef(null);
-  const onButtonClick = () => {
-    // `current` points to the mounted file input element
-   inputFile.current.click();
+  const categories=useQuery('subcategory',()=>{return api.get('subcategories')});
+  const suppliers=useQuery('suppliers',()=>{return api.get('suppliers')})
+  const handleChanges = (tag, checked) => {
+    const nextSelectedTags = checked
+      ? [...selectedTags, tag]
+      : selectedTags.filter((t) => t !== tag);
+    setSelectedTags(nextSelectedTags);
   };
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList)
+  };
+  
+  const onPreview = async (file) => {
+    let src = file.url;
 
-  return (
-    
-    <div className='new_items'>
-        <div className = "container-fluid">
-           <Header style={{background : '#fff'}}>
-               <span><i class="fa-solid fa-plus" style={{color:'#F4AD33', fontSize : 24, cursor:'pointer'}}></i></span>
-               <a href="#">አዲስ እቃ</a>
-               <span><i class="fa-solid fa-xmark" style={{color: '#000', fontSize : 24, marginLeft:1150, marginTop:-20, cursor:'pointer'}}></i></span>
-           <div className='vertical_line'>
-           </div>
-           </Header>
-           <div className='input_area'>
-            <Input placeholder="ቲማቲም" allowClear style={{width:400,height:50, marginTop:50, marginLeft:100}}/>
-             <TextArea placeholder="ገበሬው ቀጥታ በጥራት የቀረበ ቲማቲም።" allowClear  style={{ marginLeft:400}}/>
-            </div>
-          
-        <div className='item_pics'  key={state.cards}>
-          <h2>ፎቶዎች</h2>
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
 
-        
+        reader.onload = () => resolve(reader.result);
+      });
+    }
 
-          <Card className='first_card'
-           hoverable
-           style={{ width: 580, height: 550, border:'1px dashed #000', marginLeft:50 }}
-           >
-              <Card className='upload_card'
-           hoverable
-           style={{ width: 140, height: 130, background:'#FAFAFA' }}
-           >
-           <input type='file' id='file' ref={inputFile} style={{display: 'none' }} accept="image/*" onChange={fileSelectedHandler} multiple/>
-            <button style={{borderColor:'#FAFAFA', backgroudColor : '#FAFAFA', marginLeft:15}} onClick={addRobotHandler}> <span>
-              <i class="fa-solid fa-plus" style={{color:'#8C8C8C', 
-             fontSize : 30, cursor:'pointer', marginLeft:5, marginTop:10, 
-             cursor:'pointer'}}></i>
-             </span>
-             </button>
-            
-             <h3 style={{fontSize:10, marginTop:10}}>እዚህ ጋር ፎቶ ያስገቡ</h3>
-         
-       <div className={otherClass}>
-              <Row gutter={[0, 200]}>
-              <Col span={10} className="col">
-              <div className='new_items_added'>
-             {getCards()}
-             </div>
-             </Col>
-             </Row>
-        </div>
-        <div className="new_item_added2">
-         <Row gutter={[0, 200]}>
-              <Col span={10} className="col">
-              <div className='new_items'>
-             {printCards()}
-             </div>
-             </Col>
-             </Row>
-        </div>
-         <div className="new_item_added2">
-         <Row gutter={[0, 200]}>
-              <Col span={10} className="col">
-              <div className='new_items'>
-             {printCard()}
-             </div>
-             </Col>
-             </Row>
-        </div>
-             </Card>
-            </Card>
-
-        </div>
-        <div className='page_input'>
-          <h2>ዋጋ</h2>
-         
-          <div className='birr'>
-         <Input type="text" placeholder="50"   value="ብር" className='birrs' style={{width:400,height:50}}/>
-          </div>
-         <div className='number'>
-          <Input placeholder="Basic usage" value="45" className='numbers' style={{width:350, height:50}}  />
-          </div>
-          <div className='switch'>
-            <Switch defaultChecked style={{background:'#F4AD33'}}/>
-          </div>
-          <div className='select_team'>
-              <Select defaultValue="ቡድን ይምረጡ" className="select-after">
-    <Option value="ቡድን ይምረጡ">ቡድን ይምረጡ</Option>
-    <Option value="ምግብ">ምግብ</Option>
-    <Option value="የታሸገ ምግብ">የታሸገ ምግብ</Option>
-    <Option value="መጠጥ">መጠጥ</Option>
-     <Option value="ልብስ">ልብስ</Option>
-     </Select>
-      <Button>  <span><i class="fa-solid fa-plus" style={{color:'#F4AD33', fontSize : 24, cursor:'pointer'}}></i></span></Button>
-          </div>
-          <div className='selected_items'>
-             <Button >ምግብ  <span><i class="fa-solid fa-xmark" style={{color: '#000', fontSize : 20,  marginTop:0,marginLeft:20, cursor:'pointer'}}></i></span></Button>
-              <Button className='btn_two'>የታሸገ ምግብ <span><i class="fa-solid fa-xmark" style={{color: '#000', fontSize : 20,  marginTop:0,marginLeft:20, cursor:'pointer'}}></i></span></Button>
-          </div>
-          <div className='deliver'>
-            <h2 style={{marginLeft:0}}>አምጪው</h2>
-            
-      <Select defaultValue="ቡድን ይምረጡ" className="select-after">
-    <Option value="ቡድን ይምረጡ">ቡድን ይምረጡ</Option>
-    <Option value="ምግብ">ምግብ</Option>
-    <Option value="የታሸገ ምግብ">የታሸገ ምግብ</Option>
-    <Option value="መጠጥ">መጠጥ</Option>
-     <Option value="ልብስ">ልብስ</Option>
-     </Select>
-      <Button>  <span><i class="fa-solid fa-plus" style={{color:'#F4AD33', fontSize : 24, cursor:'pointer'}}></i></span></Button>
-          
-          </div> <div className='selected_item'>
-                <Button  className='btn_one'>ምግብ  <span><i class="fa-solid fa-xmark" style={{color: '#000', fontSize : 20,  marginTop:0,marginLeft:20, cursor:'pointer'}}></i></span></Button>
-              <Button className='btn_two'>የታሸገ ምግብ <span><i class="fa-solid fa-xmark" style={{color: '#000', fontSize : 20,  marginTop:0,marginLeft:20, cursor:'pointer'}}></i></span></Button><br />
-               <Button className='btn_three'>አስቤዛ ትልቅ ቤተሰብ" <span><i class="fa-solid fa-xmark" style={{color: '#000', fontSize : 20,  marginTop:0,marginLeft:20, cursor:'pointer'}}></i></span></Button>
-             </div>
-          <div className='size'>
-            <h2>መጠን</h2>
-            <Button>  <span><i class="fa-solid fa-plus" style={{color:'#F4AD33',  fontSize : 24, cursor:'pointer'}}></i></span></Button>
-            </div>
-            <div className='border_bottom'>
-
-            </div>
-            <div className='bottom_btn2'>
-              <button  primary>Finish</button>
-            </div>
-            
-          
-
-          
-          </div>
-        </div>
-        </div>
-       
-)
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow?.document.write(image.outerHTML);
+  };
+  const [store_quantities,setStore_quantities]=useState([]);
+  const registerProduct=()=>{
+       const fd=new FormData();
+       fd.append('name',product.name);
+       fd.append('description',product.description);
+       fd.append('supplier_id',product.supplier_id);
+       fd.append('brand',product?.brand);
+       fd.append('price',product.price);
+       fd.append('discount',product.discount);
+       fd.append('weight',product?.weight);
+       fd.append('sub_category_id',product.sub_category_id);
+       fd.append('measurement_type',product.measurement_type);
+       for(let i=0;i<selectedTags.length;i++) 
+          {
+            fd.append('size[]',selectedTags[i]);
+          }
+       for(let i=0;i<fileList.length;i++)
+          {
+            fd.append('images[]',fileList[i].originFileObj,fileList[i].originFileObj.name);
+          }
+         Object.keys(store_quantities).forEach(key =>{
+            fd.append(`store_quantities[0][${key}]`,store_quantities[key]);
+         });
+      api.post('products',fd).then(res=>{
+        message.success("Product Registered succesfully");
+        window.location.reload(false);
+      }).catch(err=>{
+        message.error(err.response.data.message)
+      })
   }
 
+    return (
+    <div className='new_items'>
+           <Form layout="vertical" hideRequiredMark>
+          <Row gutter={16} style={{marginTop:10}}>
+            <Col span={12}>
+              <Form.Item
+                name="name"
+                label="የእቃው ስም"
+                rules={[
+                  {
+                    required:false,
+                    message: 'እባኮን የእቃውን ስም ያስገቡ',
+                  },
+                ]}
+              >
+                <Input placeholder="Product Name" onChange={(e)=>{setProduct(pre=>
+                    {
+                      return{...pre,name:e.target.value}
+                    })}}/>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="price"
+                label="ዋጋ"
+                rules={[
+                  {
+                    required:false,
+                    message: 'ዋጋውን ያስገቡ',
+                  },
+                ]}
+              >
+                <Input
+                  style={{
+                    width: '100%',
+                  }}
+                  placeholder="ዋጋው እዚህ ጋር"
+                  onChange={(e)=>{setProduct(pre=>
+                    {
+                      return{...pre,price:e.target.value}
+                    })}}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+            <Form.Item
+                name="description"
+                label="ገለጻ ስለ እቃው"
+                rules={[
+                  {
+                    required:false,
+                    message: 'እባኮን መግለጫውን አስተካክለው ያስገቡ',
+                  },
+                ]}
+              >
+                <Input.TextArea rows={4} placeholder="Detail Description About The Product"
+                onChange={(e)=>{setProduct(pre=>
+                  {
+                    return{...pre,description:e.target.value}
+                  })}}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="discount"
+                rules={[
+                  {
+                    required:false,
+                    message: 'ቅናሽ ዋጋ ያስገቡ',
+                  },
+                ]}
+              >
+                <Input
+                  style={{
+                    width: '85%',
+                  }}
+                  placeholder="ቅናሽ"
+                  onChange={(e)=>{setProduct(pre=>
+                    {
+                      return{...pre,discount:e.target.value}
+                    })}}
+                />
+                <Switch/>
+              </Form.Item>
+              <Form.Item
+                name="category"
+                rules={[
+                  {
+                    required:false,
+                    message: 'እባኮን መጠን ያስገቡ',
+                  },
+                ]}
+              >
+           <Select style={{width: '100%'}} onChange={(value)=>{setProduct(pre=>
+                    {
+                      return{...pre,sub_category_id:value}
+                    })}} placeholder='ቡድን'>
+                {categories?.data?.data?.data.map(cat=>{
+                return <Option value={cat?.id}>{cat?.name}</Option>
+                })}
+           </Select>
+  
+    
+                
+              </Form.Item>
+              
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="photos"
+                label="ፎቶዎች"
+                rules={[
+                  {
+                    required:false,
+                    message: 'ምንም አይነት ፎቶ አላስገቡም',
+                  },
+                ]}
+              >
+                <ImgCrop rotate>
+      <Upload
+        listType="picture-card"
+        fileList={fileList}
+        onChange={onChange}
+        onPreview={onPreview}
+        accept='.jpg, .jpeg, .png, .bmp, .gif, .svg,.webp'
+        beforeUpload={(file)=>{
+           return false;
+        }}
+      >
+        {fileList.length < 6 && '+ ፎቶ'}
+      </Upload>
+    </ImgCrop>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="supplier"
+                rules={[
+                  {
+                    required:false,
+                    message: 'እባኮን አቅራቢውን ይምረጡ',
+                  },
+                ]}
+              >
+            
+           <Select style={{width: '100%'}} onChange={(value)=>{setProduct(pre=>
+                    {
+                      return{...pre,supplier_id:value}
+                    })}} placeholder='አምጪው  '>
+                {suppliers?.data?.data?.data.map(sup=>{
+                  return <Option value={sup.id}>{sup.name}</Option>
+                })}
+           </Select>
+           <Form.Item
+                name="quantity"
+                rules={[
+                  {
+                    required:false,
+                    message: 'ብዛት አላስገቡም',
+                  },
+                ]}
+              >
+                <span 
+                style={{
+                  marginRight: 8,
+                  display:'block',
+                  marginTop:10,
+                  marginBottom:10
+                }}>
+                <Input
+                  style={{
+                    width: '100%',
+                  }}
+                  onChange={(e)=>{
+                    setStore_quantities(pre=>
+                    {
+                      return{...pre,quantity:e.target.value}
+                    });
+                    setStore_quantities(pre=>
+                      {
+                        return{...pre,store_id:2}
+                      });
+                      setProduct(pre=>
+                    {
+                      return{...pre,store_quantities:store_quantities}
+                    })}}
+                  placeholder="ብዛት"
+                />
+                </span>
 
+                <Select style={{width: '100%'}} onChange={(value)=>{setProduct(pre=>
+                    {
+                      return{...pre,measurement_type:value}
+                    })}} placeholder='መለኪያ'>
+                    <Option value='unit'>Unit</Option>
+                    <Option value='kilo'>Kilo</Option>
+           </Select>
+              </Form.Item>
+
+           <span
+        style={{
+          marginRight: 8,
+          display:'block',
+          marginTop:10,
+          marginBottom:10
+        }}
+      >
+        መጠን:
+      </span>
+      {tagsData?.map((tag) => (
+        <CheckableTag
+          style={{marginRight: 8}}
+          key={tag}
+          checked={selectedTags.indexOf(tag) > -1}
+          onChange={(checked) => handleChanges(tag, checked)}
+        >
+          {tag}
+        </CheckableTag>
+      ))}
+              </Form.Item>
+              
+            </Col>
+            
+          </Row>
+          <Row>
+            <Col style={{marginLeft:"35%"}} span={24}>
+              <div className='bottom_btn2'>
+                  <button primary onClick={registerProduct}>መዝግብ</button>
+              </div>
+            </Col>
+          </Row>
+        </Form>
+        </div>
+       
+  )
+
+}
+
+export default NewItems;
