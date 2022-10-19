@@ -1309,10 +1309,13 @@ padding-bottom: 1%;
  .fourth_card .deliver h6{
   padding-top: 25%;
   margin-top: -25%;
-  padding-bottom: 2%;
+  padding-bottom: 4%;
 }
 .fourth_card .deliver span{
-  margin-left: 65%;
+  margin-left: 72%;
+}
+.fourth_card .deliver .total_price span{
+  margin-left: 60%;
 }
 .fourth_card .total{
   margin-top: 10%;
@@ -1369,12 +1372,8 @@ padding-bottom: 1%;
    margin-left: 180px;
  }
 
-.cart_page .footer{
-  background-color: #000;
-  margin-top: 20%;
-  padding-top: 10%;
-  padding-bottom: 5%;
-}
+
+ 
 .info .content .steps{
   width: 50%;
   margin-left: 22%;
@@ -1477,9 +1476,42 @@ padding-bottom: 1%;
   
 
 }
-.transport .content .orders .bottom_border{
-margin-top: 9%;
+.transport .orders{
+ top: 0;
+ left: 0;
+ margin-top: -320px;
+ margin-right: 120px;
+
+
 }
+.transport .orders .deliver .total_price{
+  padding-top: 120px;
+  width: 100%;
+}
+.transport .content .orders .title h6{
+  position: absolute;
+  top: 0;
+  right: 0;
+ margin-top: 30px;
+ margin-right: 40px;
+}
+
+/* Cart Pages */
+
+
+.cart_page .orders .deliver .total_price {
+  padding-top: 120px;
+  width: 100%;
+}
+
+.cart_page  .orders .title h6 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 30px;
+  margin-right: 40px;
+}
+
 .transport .footer {
   background-color: #000;
   margin-top: 20%;
@@ -4362,9 +4394,13 @@ margin-left: 31px;
   }
 
   .cart_page .product_card{
-      margin-top: 30px;
+    margin-top: 70px;
+    
+
+    
      }
   .cart_page .orders{
+    width: 27%;
     position: absolute;
     margin-left: 68%;
     top: 0;

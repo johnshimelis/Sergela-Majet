@@ -9,6 +9,7 @@ import tele from '../images/tele.png'
 import awash from '../images/awash.png'
 import coin from '../images/coin.png'
 import success from '../images/success.png';
+import HomeFooter from './home_footer';
 
 const { Header, Content, Footer } = Layout;
 const { Meta } = Card;
@@ -180,7 +181,7 @@ const steps = [
                <Col span={4}>
            <Card className='third_card'
            hoverable
-           style={{ width: 400, height: 120, marginTop:-20,marginLeft:400, background:'#fff'}}
+           style={{ width: 400, height: 120, marginTop:15,marginLeft:400, background:'#fff'}}
               
             cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={coin} style={{marginTop:10,marginLeft:270, width:120, height:100}}/>} >
              <h5 style={{marginTop:-110, marginLeft:-10,fontWeight:'200'}}>ያለዎት ሂሳብ</h5>
@@ -272,62 +273,7 @@ const steps = [
         </div>  
         </Modal>
             </div>
-            <div className='footer'>
-        <div className='container-fluid'>
-            <Row gutter={[8, 32]}>
-               <Col span={6}>
-                  <div className='part_1'  style={{marginTop:-50, color:'#000'}}>
-                       <h1 style={{color:'#fff'}}>ለጋዜጣችን ይመዝገቡ</h1> 
-                       <h4 style={{color:'#fff'}}>ስለሚሸምቱት ዕቃዎች አዲስ መረጃ ለመስማት ሁልግዜም ቀዳሚ ይሁኑ</h4> 
-                       <Input  style={{ width: 'calc(100% - 200px)', color:'#fff' }} placeholder="ኢሜል አድራሻ" />
-                       <Button style={{color:'#fff'}} type="primary">ይመዝገቡ</Button>
-                  </div>
-                </Col>
-            </Row>
-     <Row gutter={[8,200]}>
-       <Col span={4}>
-            <div className='part_2 ' style={{color:'#fff'}}>
-          <h3 style={{color:'#fff'}}>ይግዙ</h3>
-          <h5 style={{color:'#fff'}}>ልብስና ጫማ</h5>
-           <h5 style={{color:'#fff'}}>መጳሕፍት</h5>
-            <h5 style={{color:'#fff'}}>አስቤዛ</h5>
-             <h5 style={{color:'#fff'}}> ምግብና መጠጥ</h5>
-              <h5 style={{color:'#fff'}}>የውበቶ ዕቃዎች</h5>
-            </div>
-         </Col>
-         <Col span={4}>
-         <div className='part_2 part_3'>
-         
-          <h5 style={{color:'#fff'}}>ኤሌክትሮኒክስ</h5>
-           <h5 style={{color:'#fff'}}>የቤት ዕቃዎች</h5>
-            <h5 style={{color:'#fff'}}>የጵሕፈት መሳሪያዎች</h5>
-             <h5 style={{color:'#fff'}}>መድኃኒቶች</h5>
-            </div>
-            </Col>
-        <Col span={4}>
-         <div className='part_2'>
-          <h3 style={{color:'#fff'}}>ሻጭ ይሁኑ!</h3>
-          <h5 style={{color:'#fff'}}>መረጃ ማዕከል</h5>
-           <h5 style={{color:'#fff'}}>ያዘዙት ዕቃዎች</h5>
-            <h5 style={{color:'#fff'}}>መመለሻ ፓሊሲ</h5>
-             <h5 style={{color:'#fff'}}>ያነጋግሩን</h5>
-             
-            </div>
-            </Col>
-              <Col span={4}>
-         <div className='part_2'>
-          <h3 style={{color:'#fff'}}>ሰረገላ</h3>
-          <h5 style={{color:'#fff'}}>ስለ ሰረገላ</h5>
-           <h5 style={{color:'#fff'}}>ሀላፊነት</h5>
-            <h5 style={{color:'#fff'}}>ራዕይ</h5>
-             
-            </div>
-            </Col>
-            </Row>
-        </div>
-
-
-    </div>
+           <HomeFooter />
         </div>
  <div className='success' id='success' style={{display:'none'}}>
         <div className='container-fluid'>

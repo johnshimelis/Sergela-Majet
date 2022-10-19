@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from '../adapter/base'
 import LastHeader from '../components/last_header';
 import { useSelector} from 'react-redux';
+import HomeFooter from './home_footer';
 const { Meta } = Card;
 const { Step } = Steps;
 
@@ -93,62 +94,7 @@ export default function Info() {
                </div>
             </div>
 
-              <div className='footer'>
-        <div className='container-fluid'>
-            <Row gutter={[8, 32]}>
-               <Col span={6}>
-                  <div className='part_1'  style={{marginTop:-50, color:'#000'}}>
-                       <h1 style={{color:'#fff'}}>ለጋዜጣችን ይመዝገቡ</h1> 
-                       <h4 style={{color:'#fff'}}>ስለሚሸምቱት ዕቃዎች አዲስ መረጃ ለመስማት ሁልግዜም ቀዳሚ ይሁኑ</h4> 
-                       <Input  style={{ width: 'calc(100% - 200px)', color:'#fff' }} placeholder="ኢሜል አድራሻ" />
-                       <Button style={{color:'#fff'}} type="primary">ይመዝገቡ</Button>
-                  </div>
-                </Col>
-            </Row>
-     <Row gutter={[8,200]}>
-       <Col span={4}>
-            <div className='part_2 ' style={{color:'#fff'}}>
-          <h3 style={{color:'#fff'}}>ይግዙ</h3>
-          <h5 style={{color:'#fff'}}>ልብስና ጫማ</h5>
-           <h5 style={{color:'#fff'}}>መጳሕፍት</h5>
-            <h5 style={{color:'#fff'}}>አስቤዛ</h5>
-             <h5 style={{color:'#fff'}}> ምግብና መጠጥ</h5>
-              <h5 style={{color:'#fff'}}>የውበቶ ዕቃዎች</h5>
-            </div>
-         </Col>
-         <Col span={4}>
-         <div className='part_2 part_3'>
-         
-          <h5 style={{color:'#fff'}}>ኤሌክትሮኒክስ</h5>
-           <h5 style={{color:'#fff'}}>የቤት ዕቃዎች</h5>
-            <h5 style={{color:'#fff'}}>የጵሕፈት መሳሪያዎች</h5>
-             <h5 style={{color:'#fff'}}>መድኃኒቶች</h5>
-            </div>
-            </Col>
-        <Col span={4}>
-         <div className='part_2'>
-          <h3 style={{color:'#fff'}}>ሻጭ ይሁኑ!</h3>
-          <h5 style={{color:'#fff'}}>መረጃ ማዕከል</h5>
-           <h5 style={{color:'#fff'}}>ያዘዙት ዕቃዎች</h5>
-            <h5 style={{color:'#fff'}}>መመለሻ ፓሊሲ</h5>
-             <h5 style={{color:'#fff'}}>ያነጋግሩን</h5>
-             
-            </div>
-            </Col>
-              <Col span={4}>
-         <div className='part_2'>
-          <h3 style={{color:'#fff'}}>ሰረገላ</h3>
-          <h5 style={{color:'#fff'}}>ስለ ሰረገላ</h5>
-           <h5 style={{color:'#fff'}}>ሀላፊነት</h5>
-            <h5 style={{color:'#fff'}}>ራዕይ</h5>
-             
-            </div>
-            </Col>
-            </Row>
-        </div>
-
-
-    </div>
+      <HomeFooter />
      </div>
      
     </div>

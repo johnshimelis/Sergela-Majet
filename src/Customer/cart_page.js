@@ -6,6 +6,7 @@ import { useNavigate,Link} from "react-router-dom";
 import {DeleteOutlined} from '@ant-design/icons';
 import { useSelector,useDispatch } from 'react-redux';
 import { actions } from '../store/products-slice';
+import HomeFooter from './home_footer';
 const { Header} = Layout;
 const { Meta } = Card;
 export default function CartPage() {
@@ -68,10 +69,13 @@ return (
            hoverable
            
            >
-             <Meta title="ትዕዛዞች"/>
-             <h6 style={{marginLeft:270, marginTop:-20}}> {quantity} እቃዎች</h6>
-              <div className='bottom_border'>
-             </div>
+            <div className='title'>
+              <h3>ትዕዛዞች</h3>
+             <h6> {quantity} እቃዎች</h6>
+                <div className='bottom_border'>
+                  
+                </div>
+              </div>
              {selected_products?.map(choicen=>{
                   <div className='bottom_border'>
 
@@ -110,7 +114,7 @@ return (
              </div>
              </Card>
             </div>
-
+          <HomeFooter />
 </div>
 
     

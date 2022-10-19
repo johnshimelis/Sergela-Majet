@@ -5,6 +5,7 @@ import coin from '../images/coin.png'
 import LastHeader from '../components/last_header';
 import api from '../cust_adapter/base';
 import {useSelector} from 'react-redux';
+import HomeFooter from './home_footer';
 const { Header} = Layout;
 const { Step } = Steps;
 
@@ -186,9 +187,9 @@ export default function Transport() {
                <Col span={8}>
                <Card className='third_card'
            hoverable
-           style={{ width: 400, height: 120, marginTop:10,marginLeft:200, background:'#fff'}}
+           style={{ width: 450, height: 120, marginTop:10,marginLeft:210, background:'#fff'}}
               
-            cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={coin} style={{marginTop:10,marginLeft:270, width:120, height:100}}/>} >
+            cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={coin} style={{marginTop:10,marginLeft:320, width:120, height:100}}/>} >
              <h5 style={{marginTop:-110, marginLeft:-10,fontWeight:'200'}}>ያለዎት ሂሳብ</h5>
                 <h4 style={{marginTop:20, marginLeft:-10, fontWeight:'300'}}>{remaining_price} ብር</h4>
            </Card>
@@ -214,21 +215,25 @@ export default function Transport() {
               <Button style={{color:'#000', background:'#F4AD33',height:50}} type='warning' onClick={()=>{sendOrder(transport)}}>የሰረገላ የብድር ክፍያ</Button>
               <Button style={{marginLeft:22, background:'#000', height:50}} type='primary' onClick={()=>{navigate('/payment',{state:{user:loc.state.user,type:transport}})}}>ወደ ክፍያ ይሂዱ</Button>
               
-              <div className='orders'>
+      <div className='orders'>
           <Card className='fourth_card'
            hoverable
            
            >
-             <Meta title="ትዕዛዞች"/>
-             <h6 style={{marginLeft:270, marginTop:-20}}> {quantity} እቃዎች</h6>
-              <div className='bottom_border'>
-             </div>
+            <div className='title'>
+              <h3>ትዕዛዞች</h3>
+             <h6> {quantity} እቃዎች</h6>
+                <div className='bottom_border'>
+
+              </div>
+              </div>
              {selected_products?.map(choicen=>{
                   <div className='bottom_border'>
 
-             </div>
+              </div>
+            
               return(
-             <Card className='third_card'
+          <Card className='third_card'
            hoverable
            style={{ width: 150, height: 100, marginTop:50, background:'#FAFAFA'}}
             cover={<img alt="አስቤዛ መካከለኛ ቤተሰብ" src={Array.isArray(choicen.image_paths)?choicen.image_paths[0]:choicen.image_paths} />}>
@@ -244,78 +249,24 @@ export default function Transport() {
             }
              )
           }
-               <div className='deliver'>
+              <div className='deliver'>
+              <h6>ማድረሻ</h6>
              <h6>ቅናሽ<span style={{color:'red'}}><strike>{totalDiscount} ብር</strike></span></h6>
-             <h6>ጠቅላላ ዋጋ፡ <span>{totalPrice} ብር</span></h6>
-           <div className='bottom_border'>
-             
+              <h6>ታክስ</h6>
+               <div className='bottom_border'>
              </div>
+             <h6 className='total_price'>ጠቅላላ ዋጋ፡ <span>{totalPrice} ብር</span></h6>
+         
              </div>
              <div className='total'>
-                 <div className='bottom_border'>
-             </div>
+                
              </div>
              </Card>
             </div>
 
   
             </div>
-        <div className='footer'>
-        <div className='container-fluid'>
-            <Row gutter={[8, 32]}>
-               <Col span={6}>
-                  <div className='part_1'  style={{marginTop:-50, color:'#000'}}>
-                       <h1 style={{color:'#fff'}}>ለጋዜጣችን ይመዝገቡ</h1> 
-                       <h4 style={{color:'#fff'}}>ስለሚሸምቱት ዕቃዎች አዲስ መረጃ ለመስማት ሁልግዜም ቀዳሚ ይሁኑ</h4> 
-                       <Input  style={{ width: 'calc(100% - 200px)', color:'#fff' }} placeholder="ኢሜል አድራሻ" />
-                       <Button style={{color:'#fff'}} type="primary">ይመዝገቡ</Button>
-                  </div>
-                </Col>
-            </Row>
-     <Row gutter={[8,200]}>
-       <Col span={4}>
-            <div className='part_2 ' style={{color:'#fff'}}>
-          <h3 style={{color:'#fff'}}>ይግዙ</h3>
-          <h5 style={{color:'#fff'}}>ልብስና ጫማ</h5>
-           <h5 style={{color:'#fff'}}>መጳሕፍት</h5>
-            <h5 style={{color:'#fff'}}>አስቤዛ</h5>
-             <h5 style={{color:'#fff'}}> ምግብና መጠጥ</h5>
-              <h5 style={{color:'#fff'}}>የውበቶ ዕቃዎች</h5>
-            </div>
-         </Col>
-         <Col span={4}>
-         <div className='part_2 part_3'>
-         
-          <h5 style={{color:'#fff'}}>ኤሌክትሮኒክስ</h5>
-           <h5 style={{color:'#fff'}}>የቤት ዕቃዎች</h5>
-            <h5 style={{color:'#fff'}}>የጵሕፈት መሳሪያዎች</h5>
-             <h5 style={{color:'#fff'}}>መድኃኒቶች</h5>
-            </div>
-            </Col>
-        <Col span={4}>
-         <div className='part_2'>
-          <h3 style={{color:'#fff'}}>ሻጭ ይሁኑ!</h3>
-          <h5 style={{color:'#fff'}}>መረጃ ማዕከል</h5>
-           <h5 style={{color:'#fff'}}>ያዘዙት ዕቃዎች</h5>
-            <h5 style={{color:'#fff'}}>መመለሻ ፓሊሲ</h5>
-             <h5 style={{color:'#fff'}}>ያነጋግሩን</h5>
-             
-            </div>
-            </Col>
-              <Col span={4}>
-         <div className='part_2'>
-          <h3 style={{color:'#fff'}}>ሰረገላ</h3>
-          <h5 style={{color:'#fff'}}>ስለ ሰረገላ</h5>
-           <h5 style={{color:'#fff'}}>ሀላፊነት</h5>
-            <h5 style={{color:'#fff'}}>ራዕይ</h5>
-             
-            </div>
-            </Col>
-            </Row>
-        </div>
-
-
-    </div>
+       <HomeFooter />
               
         </div> 
         <Modal className='payment_approval' cancelButtonProps={{style:{backgroundColor:'#f44336'}}}okButtonProps={{style:{backgroundColor:'green'}}}visible={visible} closable={false} onOk={()=>onOk(shippingDetail.id)} onCancel={onCancel} okText='Approve' cancelText='Decline'>
