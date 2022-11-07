@@ -94,7 +94,7 @@ function LastHome() {
       </ul>
     </div>
     
-          <div className="bars" id='bars'>
+      <div className="bars" id='bars'>
          
           <span onClick={toggleClass} ><i class="fa-solid fa-bars"></i></span>
        
