@@ -11,7 +11,8 @@ import imager3 from '../images/imager3.jpg'
 import imager4 from '../images/imager4.jpg'
 import imager5 from '../images/imager5.jpg'
 import package1 from '../images/packages.png'
-import image1 from '../images/sunchips.png';
+
+import image1 from '../images/asbeza.png';
 import image2 from '../images/user.png';
 import image3 from '../images/rectangle.png';
 import image4 from '../images/delivery.png';
@@ -24,7 +25,7 @@ import image21 from '../images/discount2.png';
 import image22 from '../images/discount1.png';
 import image23 from '../images/discount3.png';
 import image24 from '../images/women.png';
-import SideNav from './side_nav';
+import SideNav from '../components/side_nav2';
 function LastHome() {
   const [isSideNav, setSideNav] = useState(false);
   const usenav=useNavigate();
@@ -68,7 +69,7 @@ function LastHome() {
     <div className='last_home'> 
     <LastHeader/>
      
-    <div className={isSideNav ? 'last_side_nav': 'new_nav'} id="last_side_nav">
+    <div className={isSideNav ? 'last_side_nav' : 'new_nav'} id="last_side_nav">
 
     <div className='close'>
       <span><i onClick={toggleClass} class="fa-solid fa-xmark"></i></span>
@@ -104,23 +105,23 @@ function LastHome() {
          <div className='content'>
       <Carousel autoplay >
       <div>
-         <h3>3 Sunchips <span>ሲገዙ አንድ በነጻ</span></h3>
-          <p>100% ከተፈጥሮ ግብአት የተዘጋጀ ቺብስ፤ ምንም ቃና የሌለው፤ በፈለጉት
-            አይነት ጣእም የተዘጋጀ
+         <h3>5 የወር አስቤዛ  <span>ሲገዙ አንድ ጭማሪ</span></h3>
+          <p>ውድ ደንበኞቻችን አስቤዛ ካሉበት ቦታ ሆነው ይዘዙን:: በፍጥነት እናደርሳለን
+          100% ከተፈጥሮ ግብአት የተዘጋጁ ፤ በፈለጉት መጠን እናዘጋጃለን
           </p>
           <Button type='warning'>አሁኑኑ ይሸምቱ</Button>
           <div className='circular'>
-            <img src={image1} />
+            <img src={image1} style={{width:'121%',height:'90%',paddingLeft:'10%',paddingTop:'10%'}}/>
           </div>
       </div>
        <div>
-         <h3>3 Sunchips <span>ሲገዙ አንድ በነጻ</span></h3>
-          <p>100% ከተፈጥሮ ግብአት የተዘጋጀ ቺብስ፤ ምንም ቃና የሌለው፤ በፈለጉት
-            አይነት ጣእም የተዘጋጀ
+         <h3>5 የወር አስቤዛ  <span>ሲገዙ አንድ ጭማሪ</span></h3>
+          <p>ውድ ደንበኞቻችን አስቤዛ ካሉበት ቦታ ሆነው ይዘዙን:: በፍጥነት እናደርሳለን
+          100% ከተፈጥሮ ግብአት የተዘጋጁ ፤ በፈለጉት መጠን እናዘጋጃለን
           </p>
           <Button type='warning'>አሁኑኑ ይሸምቱ</Button>
           <div className='circular'>
-            <img src={image1} />
+            <img src={image1} style={{width:'121%',height:'90%',paddingLeft:'10%',paddingTop:'10%'}}/>
           </div>
       </div>
   </Carousel>
@@ -129,16 +130,15 @@ function LastHome() {
 </div>
 
 <div className='right_side'>
-  {!isLoggedIn?
   <div className='intro'>
   <img src={image2} />
   <h5>እንኳን በደህና መጡ! </h5>
-    
-    <Button className='enter_btn' onClick={()=>{usenav('/login')}}>ይግቡ</Button>
-    <Button onClick={()=>{usenav('/registration')}}>ይመዝገቡ</Button>
-    
-    </div>
+  {!isLoggedIn?
+    <div><Button className='enter_btn' onClick={()=>{usenav('/login')}}>ይግቡ</Button>
+    <Button onClick={()=>{usenav('/registration')}}>ይመዝገቡ</Button></div>
     :''}
+    </div>
+    
     <div className='rectangle'>
       <img src={image3} />
       <h6>በቂ ገንዘብ የለዎትም፤ አይጫነቁ የብድር አገልግሎታችንን ይመዝገቡ!</h6>
@@ -147,9 +147,9 @@ function LastHome() {
      
 </div>
 
+
 <div className='services'>
-  
-  <div className='card'>
+    <div className='card'>
     <div className='cards'>
        <img alt="PepsiCo" src={image4}/>
        <h6>ነጻ ትራንስፖርት</h6>
@@ -167,8 +167,8 @@ function LastHome() {
     </div>
      <div className='cards'>
        <img alt="PepsiCo" src={image7}/>
-       <h6>ጥራቱን የጠበቀ እቃ</h6>
-        <p>ደረጃቸወን የጠበቁ እቃዎች</p>
+       <h6>ብዛት ያለው እቃ</h6>
+        <p>ብዛት ያላቸው እቃዎች በቅናስ ዋጋ</p>
     </div>
      <div className='cards'>
        <img alt="PepsiCo" src={image8}/>
@@ -176,6 +176,7 @@ function LastHome() {
         <p>ጥራቱን የጠበቀ እቃ በቅናስ ዋጋ</p>
     </div>
   </div>
+
 </div>
 <div className='some_btn'>
   <Button>ከተመረጡ ምድቦቻችን ይገብዩ!</Button>
@@ -260,7 +261,8 @@ function LastHome() {
         </div>
           </div>
         </div>
-        <HomeFooter />
+        <HomeFooter /> 
+      
 
 </div>
 

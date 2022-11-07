@@ -110,7 +110,8 @@ export default function Transport() {
                        style={{ width: 724, height: 150, marginLeft:143, marginTop:80}}
                        >
                     
-                    <Header style={{marginLeft:-25, width:725}}><h3 style={{fontSize:23, marginTop:20, paddingTop:10, marginLeft:-27}}>ሰረገላ ፈጣን</h3></Header>
+                    <Header style={{marginLeft:-25, width:725}}><h3
+                      style={{fontSize:23, marginTop:20, paddingTop:10, marginLeft:-27}}>ሰረገላ ፈጣን</h3></Header>
                     <div className='bottom_border' style={{marginLeft:-24, width:724}}>
 
                     </div>

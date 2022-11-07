@@ -60,6 +60,9 @@ function LastHeader() {
 
     setActive(!isActive);
   };
+  const goToHome = () => {
+    navigate('/');
+  }
 const logout=()=>{
   dispatch(auth_actions.logout());
   dispatch(actions.defaultState());
@@ -73,7 +76,7 @@ const logout=()=>{
          
         <nav>
        <div className='icon'>
-            <img src={image} className="img"/>
+            <img onClick={goToHome} src={image} className="img"/>
        </div> 
        <div className='search_input'>
          <Dropdown overlay={menu} trigger={['click']} className="dropdown">
@@ -106,7 +109,11 @@ const logout=()=>{
         <div className='bar'>
           <span onClick={toggleClass} ><i class="fa-solid fa-bars"></i></span> 
         </div>
-        {user && <div><div style={{fontSize:'25px',color:'white'}} onClick={logout} className="logout"><i className='fa fa-sign-out'></i></div></div>}
+        {user && 
+        <div>
+          <div style={{fontSize:'25px',color:'white'}} onClick={logout} className="logout"><i className='fa fa-sign-out'></i>
+          </div>
+        </div>}
         
 </div>
     </nav>

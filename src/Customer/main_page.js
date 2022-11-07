@@ -91,9 +91,9 @@ export default function MainPage() {
           <p>{product?.description}</p>
 
       </div>
-      <div className='colors'>
+      {/* <div className='colors'>
           <h4>ቀለም</h4>
-   <div className='all_colors'>
+      <div className='all_colors'>
     <Row gutter={[0, 0]}>
        <Col span={2}>
           <Card
@@ -125,7 +125,7 @@ export default function MainPage() {
         </Col>
         </Row>
           </div>
-      </div>
+      </div> */}
       <div className='buttons'>
         
           <div className='main_btn'>
